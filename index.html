@@ -1,92 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marta & Emanuele — Il nostro matrimonio</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marta & Emanuele — Anteprima Quadrata</title>
+  <style>
+    /* Page without scrolling: center a square that fits viewport */
+    html,body{height:100%;margin:0}
+    :root{ --accent: #c77d7d }
+    body{display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:"Century Gothic", AppleGothic, sans-serif; background: #faf4d9 }
+
+    .square{
+      width: min(100vh, 100vw);
+      height: min(100vh, 100vw);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      background-color:#e6de90;
+      background-size:cover;
+      background-position:center center;
+      color: #fff;
+      text-align:center;
+    }
+
+    .overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.35) }
+    .content{ position:absolute; left:0; right:0; bottom:0; top:75%; z-index:2; padding:12px; display:flex; align-items:flex-end; }
+    .names{ font-family:"Century Gothic", AppleGothic, sans-serif; font-size:6vmin; margin:0; font-weight:400 }
+    .names .amp{ display:inline-block; font-size:0.95em; font-style:italic; opacity:1; margin:0 0.18em; }
+    .date{ font-weight:400; margin-top:6px; font-size:3.2vmin }
+    .countdown{ margin-top:10px; font-size:2.6vmin; font-weight:400 }
+    .action-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-template-rows:1fr; gap:10px; width:100%; height:100%; }
+    .action-card{ display:flex; align-items:center; justify-content:center; position:relative; background-size:cover; background-position:center; border-radius:14px; color:white; text-decoration:none; font-size:1.05rem; transition: transform 0.2s ease, box-shadow 0.2s ease; overflow:hidden; min-height:0; }
+    .action-card::before{ content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.5)); }
+    .action-card:hover{ transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0,0,0,0.18); }
+    .action-card span{ position:relative; z-index:1; padding:12px; }
+    .action-card.chiesa{ background-image: linear-gradient(135deg, rgba(200,177,141,0.00) 0%, rgba(167,143,111,0.28) 100%), url('./photos/chiesa.jpg'); }
+    .action-card.festa{ background-image: linear-gradient(135deg, rgba(217,199,178,0.00) 0%, rgba(183,156,133,0.28) 100%), url('./photos/festa.jpg'); }
+    .action-card.rsvp{ background-image: linear-gradient(135deg, rgba(215,177,177,0.00) 0%, rgba(183,133,133,0.28) 100%), url('./photos/rsvp.jpg'); }
+    .action-card.lista{ background-image: linear-gradient(135deg, rgba(216,208,180,0.00) 0%, rgba(183,164,127,0.28) 100%), url('./photos/lista-nozze.jpg'); }
+    .title-block{ position:absolute; top:8%; left:50%; transform:translateX(-50%); z-index:3; text-align:center; width:90% }
+
+    /* ensure nothing causes page scroll */
+    img, iframe{ max-width:100%; display:block }
+
+    @media (max-width:420px){ .names{ font-size:8vmin } }
+  </style>
 </head>
-
 <body>
+  <div class="square" id="square">
+    <div class="overlay"></div>
+    <div class="title-block">
+      <h1 class="names">Marta <span class="amp">&</span> Emanuele</h1>
+      <div class="date">03 Aprile 2027</div>
+    </div>
+    <div class="content">
+      <div class="action-grid">
+        <a class="action-card chiesa" href="https://maps.app.goo.gl/ScvbSA8MKmW7madm6" target="_blank" rel="noopener">
+          <span>Vai alla chiesa</span>
+        </a>
+        <a class="action-card festa" href="https://maps.app.goo.gl/GaUVYHBnTdK6obdK8" target="_blank" rel="noopener">
+          <span>Vai alla festa</span>
+        </a>
+        <a class="action-card rsvp" href="rsvp.html">
+          <span>RSVP</span>
+        </a>
+        <a class="action-card lista" href="lista-nozze.html">
+          <span>Lista nozze</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-    <header class="hero">
-        <div class="overlay"></div>
-        <div class="hero-content">
-            <h1 class="names">Marta & Emanuele</h1>
-            <p class="subtitle">Ci sposiamo</p>
-            <p class="date">03 Aprile 2027</p>
-            <div id="countdown" class="countdown">-- giorni -- ore -- min -- sec</div>
-            <div class="hero-cta">
-                <a class="btn" href="#" target="_blank" id="rsvp-btn">RSVP</a>
-                <a class="btn ghost" href="#info">Informazioni</a>
-            </div>
-            <div class="lang-switch">
-                <a href="index.en.html">EN</a> · <a href="index.fr.html">FR</a>
-            </div>
-        </div>
-    </header>
+  <script>
+    // load background from photos folder (one level up) and start countdown
+    (function(){
+      const sq = document.getElementById('square');
+      sq.style.backgroundImage = "url('./photos/01-panorama.jpg')";
+      // optional: allow arrow keys to nudge background position for fine-tuning
+      let posX = 50, posY = 50; // percent
+      document.addEventListener('keydown', (e)=>{
+        const step = e.shiftKey ? 5 : 1;
+        if(e.key === 'ArrowUp'){ posY = Math.max(0, posY-step); sq.style.backgroundPosition = posX+'% '+posY+'%'; }
+        if(e.key === 'ArrowDown'){ posY = Math.min(100, posY+step); sq.style.backgroundPosition = posX+'% '+posY+'%'; }
+        if(e.key === 'ArrowLeft'){ posX = Math.max(0, posX-step); sq.style.backgroundPosition = posX+'% '+posY+'%'; }
+        if(e.key === 'ArrowRight'){ posX = Math.min(100, posX+step); sq.style.backgroundPosition = posX+'% '+posY+'%'; }
+      });
 
-    <main>
-        <section class="overview-cards">
-            <div class="card">
-                <h3>Dettagli</h3>
-                <p>Luogo, orari e informazioni pratiche.</p>
-                <p><a class="btn ghost" href="info.html">Vai a Dettagli</a></p>
-            </div>
-            <div class="card">
-                <h3>RSVP</h3>
-                <p>Conferma la tua partecipazione tramite il modulo online.</p>
-                <p><a class="btn" href="rsvp.html">Vai a RSVP</a></p>
-            </div>
-            <div class="card">
-                <h3>Galleria</h3>
-                <p>Foto e ricordi — aggiorneremo con le immagini ufficiali.</p>
-                <p><a class="btn ghost" href="galleria.html">Vai alla Galleria</a></p>
-            </div>
-            <div class="card">
-                <h3>Lista Nozze</h3>
-                <p>Informazioni e link per la lista nozze.</p>
-                <p><a class="btn" href="lista-nozze.html">Vai alla Lista Nozze</a></p>
-            </div>
-        </section>
-    </main>
+      // The square preview simply shows the background and buttons.
 
-    <footer class="site-footer">
-        <p>Contatti: <a href="mailto:info@example.com">info@example.com</a></p>
-    </footer>
-
-    <script>
-        // Countdown script
-        function countdown(targetDate) {
-            const el = document.getElementById('countdown');
-            function update(){
-                const now = new Date();
-                const diff = targetDate - now;
-                if(diff<=0){ el.textContent = 'È il giorno!'; clearInterval(timer); return; }
-                const days = Math.floor(diff/1000/60/60/24);
-                const hours = Math.floor((diff/1000/60/60)%24);
-                const mins = Math.floor((diff/1000/60)%60);
-                const secs = Math.floor((diff/1000)%60);
-                el.textContent = `${days} giorni ${hours} ore ${mins} min ${secs} sec`;
-            }
-            update();
-            const timer = setInterval(update,1000);
-        }
-
-        // Target: 03 Apr 2027 (local midnight)
-        const target = new Date('2027-04-03T00:00:00');
-        countdown(target);
-
-        // Use provided background image from photos folder (relative)
-        document.addEventListener('DOMContentLoaded', ()=>{
-            const hero = document.querySelector('.hero');
-            hero.style.backgroundImage = "url('../photos/01-panorama.jpg')";
-            // Placeholder RSVP link (replace with Google Form URL)
-            document.getElementById('rsvp-btn').href = 'https://forms.gle/your-google-form-placeholder';
-        });
-    </script>
-
+    })();
+  </script>
 </body>
 </html>
