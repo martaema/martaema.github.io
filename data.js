@@ -50,6 +50,16 @@ const data = {
     aboutSub: "Clicca sulla foto",
     about: "Non vediamo l'ora di festeggiare!"
   },
-  gifts: [],
-  hotels: []
+  gifts: [
+    { name: "Viaggio di nozze in Cina", nameFr: "Voyage de noces", price: 1200, icon: "✈️", photo: "photos-liste/voyage.png", hidePrice: true },
+    { name: "Giradischi e vinili", nameFr: "Tourne-disque et vinyles", price: 300, icon: "☕", photo: "photos-liste/vinile.png" }
+  ],
+  hotels: [
+    { icon: "🏨", name: "Hotel esempio", location: "Via Esempio 1", price: 110, website: "https://example.com", map: "https://maps.google.com" }
+  ],
+  timeline: [
+    { year: 2020, photo: "photos-nous/2020.JPG", caption: "Prima foto" },
+    { year: 2021, photo: "photos-nous/2021-2.JPG", caption: "Weekend in montagna" },
+    { year: 2021, photo: "photos-nous/2021-3.JPG", caption: "Ricordi" }
+  ]
 };
