@@ -51,7 +51,7 @@ const data = {
     about: "Non vediamo l'ora di festeggiare!"
   },
   gifts: [
-    { name: "Viaggio di nozze in Cina", nameFr: "Voyage de noces", price: 1200, icon: "✈️", photo: "photos-liste/voyage.png", hidePrice: true },
+    { name: "Viaggio di nozze in Giappone", nameFr: "Voyage de noces", price: 1200, icon: "✈️", photo: "photos-liste/voyage.png", hidePrice: true },
     { name: "Giradischi e vinili", nameFr: "Tourne-disque et vinyles", price: 300, icon: "☕", photo: "photos-liste/vinile.png" }
   ],
   hotels: [

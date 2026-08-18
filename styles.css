@@ -15,6 +15,8 @@ h1{font-size:var(--h1);font-weight:300;letter-spacing:-0.01em;line-height:0.95;c
 .subtitle{font-size:clamp(1.2rem,1.6vw,1.2rem);font-style:italic;font-weight:300;color:rgba(0,0,0,0.8);margin-top:1.2rem}
 .hero-bg{position:absolute;inset:0;background: url('./photos/01-panorama.jpg') center 20% / cover no-repeat;z-index:0}
 .hero-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.25)}
+#home{align-items:center}
+#home .section-inner{position:relative;z-index:1;padding-bottom:2rem}
 .eyebrow{font-size:0.9rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
 .body-lg{font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:300;line-height:1.8;color:var(--ink-lt);max-width:52ch;margin:0 auto}
 .btn{display:inline-block;font-family:var(--font);font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;margin-top:2.5rem}
