@@ -6,7 +6,12 @@ function showSection(id) {
   if (!el) return;
   // reset internal scroll for sections that scroll themselves
   el.scrollTop = 0;
-  el.scrollIntoView({ behavior: 'smooth' });
+  // horizontal snap navigation
+  if (typeof mainEl.scrollTo === 'function') {
+    mainEl.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+  } else {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 const mainEl   = document.querySelector('main');
@@ -28,6 +33,16 @@ const observer = new IntersectionObserver(
 
 sections.forEach((s) => observer.observe(s));
 
+/* ── Swipe arrow on each page (except last) ── */
+sections.forEach((s) => {
+  if (s.id === 'rsvp') return; // last page — no next
+  const arrow = document.createElement('div');
+  arrow.className = 'swipe-arrow';
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.textContent = '\u203A'; // ›
+  s.appendChild(arrow);
+});
+
 /* ── Language ───────────────────────────── */
 function setLang(l) { lang = l; render(); }
 
@@ -43,8 +58,17 @@ function render() {
   document.getElementById('nav-gifts').innerText = t.nav.gifts;
   document.getElementById('nav-about').innerText = t.nav.about;
 
-  // Hero
-  document.getElementById('subtitle').innerText = t.subtitle;
+  // Hero — date, thin line, place
+  const subtitleEl = document.getElementById('subtitle');
+  if (t.subtitle && t.subtitle.includes('•')) {
+    const parts = t.subtitle.split('•').map(s => s.trim());
+    subtitleEl.innerHTML =
+      `<span class="subtitle-date">${parts[0]}</span>` +
+      `<span class="subtitle-line"></span>` +
+      `<span class="subtitle-place">${parts.slice(1).join(' • ')}</span>`;
+  } else {
+    subtitleEl.innerText = t.subtitle || '';
+  }
 
   // RSVP
   document.getElementById('rsvpEyebrow').innerText = t.rsvpEyebrow;
@@ -261,3 +285,82 @@ if (timeline && prev && next) {
     }
   });
 }
+
+/* ── Horizontal swipe page navigation ───── */
+function getCurrentSectionIndex() {
+  const active = document.querySelector('.nav-link.active');
+  if (!active) return 0;
+  const id = active.id.replace('nav-', '');
+  const idx = sections.findIndex(s => s.id === id);
+  return idx >= 0 ? idx : 0;
+}
+
+// Do not trigger page nav for horizontal scrollers inside a section
+function shouldSkipPageNav(e) {
+  return e.target.closest ? e.target.closest('.gift-carousel, .love-timeline') !== null : false;
+}
+
+// Touch — swipe left = next page, swipe right = previous page
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+let touchMoved = false;
+let touchSkipNav = false;
+const swipeThreshold = 60;
+const swipeMaxTime = 1000;
+
+mainEl.addEventListener('touchstart', (e) => {
+  if (e.touches.length > 1) return;
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchStartTime = Date.now();
+  touchMoved = false;
+  touchSkipNav = shouldSkipPageNav(e);
+  mainEl.classList.add('swiping');
+}, { passive: true });
+
+mainEl.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 1) return;
+  const dx = e.touches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 10) touchMoved = true;
+}, { passive: true });
+
+mainEl.addEventListener('touchend', (e) => {
+  mainEl.classList.remove('swiping');
+  if (touchSkipNav || !touchMoved) return;
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+  const dt = Date.now() - touchStartTime;
+
+  // horizontal dominant + past threshold + fast enough
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold && dt < swipeMaxTime) {
+    const current = getCurrentSectionIndex();
+    if (dx < 0) {
+      // finger moved left → next page
+      const next = Math.min(sections.length - 1, current + 1);
+      if (next !== current) showSection(sections[next].id);
+    } else {
+      // finger moved right → previous page
+      const prev = Math.max(0, current - 1);
+      if (prev !== current) showSection(sections[prev].id);
+    }
+  }
+}, { passive: true });
+
+mainEl.addEventListener('touchcancel', () => {
+  mainEl.classList.remove('swiping');
+});
+
+// Keyboard — arrow keys navigate horizontally
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  const current = getCurrentSectionIndex();
+  const target = e.key === 'ArrowRight'
+    ? Math.min(sections.length - 1, current + 1)
+    : Math.max(0, current - 1);
+  if (target !== current) {
+    e.preventDefault();
+    showSection(sections[target].id);
+  }
+});
