@@ -6,7 +6,7 @@ const data = {
   venueMap: "https://maps.app.goo.gl/GaUVYHBnTdK6obdK8",
   fr: {
     nav: { home: "Home", rsvp: "RSVP", info: "Info", stay: "Séjour", gifts: "Liste", about: "Nous" },
-    subtitle: "03 avril 2027 • Luogo",
+    subtitle: "03 avril 2027 • Basilica di Santa Maria in Domnica alla Navicella",
     rsvpEyebrow: "Répondre",
     rsvpTitle: "Serez-vous là ?",
     rsvpSub: "Faites-nous savoir.",
@@ -29,7 +29,7 @@ const data = {
   },
   it: {
     nav: { home: "Home", rsvp: "RSVP", info: "Info", stay: "Arrivo", gifts: "Lista", about: "Noi" },
-    subtitle: "03 aprile 2027 • Luogo",
+    subtitle: "03 aprile 2027 • Basilica di Santa Maria in Domnica alla Navicella",
     rsvpEyebrow: "Rispondere",
     rsvpTitle: "Ci sarai?",
     rsvpSub: "Facci sapere.",
