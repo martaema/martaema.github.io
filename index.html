@@ -3,72 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Marta & Emanuele</title>
+  <meta name="theme-color" content="#f7f1ea"/>
+  <title>Marta & Emanuele · 03.04.2027</title>
   <link rel="stylesheet" href="styles.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-    <nav class="nav-menu">
-      <a class="nav-link active" onclick="showSection('home')"  id="nav-home"></a>
-      <a class="nav-link"        onclick="showSection('info')"  id="nav-info"></a>
-      <a class="nav-link"        onclick="showSection('stay')"  id="nav-stay"></a>
-      <a class="nav-link"        onclick="showSection('gifts')" id="nav-gifts"></a>
-      <a class="nav-link"        onclick="showSection('about')" id="nav-about"></a>
-      <a class="nav-link"        onclick="showSection('rsvp')"  id="nav-rsvp"></a>
-    </nav>
-</header>
-
-<main>
+  <main id="road">
 
     <!-- 1 · HERO -->
-    <section id="home">
-      <div class="hero-bg"></div>
-      <div class="section-inner section-center">
-        <h1>Marta & Emanuele</h1>
-        <p id="subtitle" class="subtitle"></p>
+    <section class="waypoint waypoint--hero" id="way-home">
+      <div class="waypoint-inner center">
+        <div class="compass-stamp compass-stamp--large" aria-hidden="true">
+          <div class="compass-north">N</div>
+          <div class="compass-circle"></div>
+          <div class="compass-spoke"></div>
+        </div>
+        <h1>Marta <span class="amp">&</span> Emanuele</h1>
+        <p class="hero-date" id="heroDate"></p>
+        <div class="hero-divider" aria-hidden="true"></div>
+        <p class="hero-place" id="heroPlace"></p>
+        <p class="hero-swipe-hint" id="heroSwipeHint"></p>
       </div>
     </section>
 
-    <!-- 2 · INFO -->
-    <section id="info">
-      <div class="section-inner">
-        <h2 id="infoTitle"></h2>
-        <dl class="info-list">
-          <div class="info-row">
-            <dt id="churchLabel" class="eyebrow"></dt>
-            <dd id="churchInfo"></dd>
-            <dd id="churchTime"></dd>
-            <dd><a id="churchMap" class="map-link" href="#" target="_blank" rel="noopener"></a></dd>
-            <dd class="access-note" id="accessNote"></dd>
-          </div>
-          <div class="info-row">
-            <dt id="venueLabel" class="eyebrow"></dt>
-            <dd id="venueInfo"></dd>
-            <dd><a id="venueMap" class="map-link" href="#" target="_blank" rel="noopener"></a></dd>
-          </div>
-        </dl>
+    <!-- 2 · DOVE E QUANDO -->
+    <section class="waypoint" id="way-when">
+      <div class="waypoint-inner">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <p class="eyebrow" id="whenSub"></p>
+        <h2 id="whenTitle"></h2>
+        <div class="margin-notes">
+          <article class="margin-note">
+            <h3 id="churchLabel"></h3>
+            <p id="churchName" class="note-name"></p>
+            <p class="note-time" id="churchTime"></p>
+            <a href="#" id="churchMap" class="map-link" target="_blank" rel="noopener"></a>
+          </article>
+          <article class="margin-note">
+            <h3 id="venueLabel"></h3>
+            <p id="venueName" class="note-name"></p>
+            <a href="#" id="venueMap" class="map-link" target="_blank" rel="noopener"></a>
+          </article>
+        </div>
       </div>
     </section>
 
-    <!-- 3 · STAY -->
-    <section id="stay">
-      <div class="section-inner stay-inner section-center">
-        <h2 id="howToGet" class="stay-heading"></h2>
-        <div id="travelRoutes" class="travel-routes"></div>
-        <a id="trenordLink" class="trenord-link" href="https://www.trenord.it/" target="_blank" rel="noopener"></a>
+    <!-- 3 · RAGGIUNGERCI -->
+    <section class="waypoint" id="way-travel">
+      <div class="waypoint-inner">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <p class="eyebrow" id="travelSub"></p>
+        <h2 id="travelTitle"></h2>
 
-        <h2 id="stayTitle" class="stay-heading"></h2>
-        <div id="hotelGrid" class="stay-grid"></div>
+        <div class="accordion" id="travelAccordion">
+          <details class="accordion-item">
+            <summary id="fromFiumicino"></summary>
+            <div class="accordion-body travel-options">
+              <div class="travel-option"><span class="opt-icon">🚆</span><span id="optTrainDirect"></span><span class="opt-duration" id="duration32"></span></div>
+              <div class="travel-option"><span class="opt-icon">🚌</span><span id="optBusDirect"></span><span class="opt-duration" id="duration50"></span></div>
+            </div>
+          </details>
+          <details class="accordion-item">
+            <summary id="fromMilan"></summary>
+            <div class="accordion-body travel-options">
+              <div class="travel-option"><span class="opt-icon">🚆</span><span id="optTav"></span><span class="opt-duration" id="duration3h"></span></div>
+              <div class="travel-option"><span class="opt-icon">🚘</span><span id="optCar"></span><span class="opt-duration" id="duration6h"></span></div>
+            </div>
+          </details>
+        </div>
+
+        <a id="trenordLink" class="map-link" href="#" target="_blank" rel="noopener"></a>
+
+        <h3 class="hotels-heading" id="hotelsTitle"></h3>
+        <div class="hotel-grid" id="hotelGrid"></div>
       </div>
     </section>
 
-    <!-- 4 · GIFTS -->
-    <section id="gifts">
-      <div class="section-inner">
-        <h2 id="giftsTitle"></h2>
-        <p id="giftIntro" class="gift-intro"></p>
+    <!-- 4 · GLI SPOSI -->
+    <section class="waypoint" id="way-couple">
+      <div class="waypoint-inner">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <p class="eyebrow" id="coupleSub"></p>
+        <h2 id="coupleTitle"></h2>
+        <p class="body-text" id="coupleBody"></p>
+        <div class="polaroid-row">
+          <figure class="polaroid polaroid--tilt-l">
+            <img src="assets/images/placeholder-photo-meet.svg" alt="" id="couplePhoto1Alt" loading="lazy"/>
+            <figcaption class="polaroid-caption" id="couplePhoto1Caption"></figcaption>
+          </figure>
+          <figure class="polaroid polaroid--tilt-r">
+            <img src="assets/images/placeholder-photo-proposal.svg" alt="" id="couplePhoto2Alt" loading="lazy"/>
+            <figcaption class="polaroid-caption" id="couplePhoto2Caption"></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · LISTA NOZZE -->
+    <section class="waypoint" id="way-gift">
+      <div class="waypoint-inner">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <h2 id="giftTitle"></h2>
+        <p class="body-text" id="giftIntro"></p>
+
         <div class="gift-iban">
           <div class="gift-iban-card">
             <div class="gift-iban-title">Marta & Emanuele</div>
@@ -76,185 +115,83 @@
             <div class="gift-iban-bic">BIC : PLACEHOLDERXXX</div>
           </div>
         </div>
+
         <div class="gift-carousel-wrap">
           <button class="carousel-arrow carousel-arrow--prev" id="giftPrev" aria-label="Previous">&#8249;</button>
           <button class="carousel-arrow carousel-arrow--next" id="giftNext" aria-label="Next">&#8250;</button>
           <div id="giftList" class="gift-carousel"></div>
           <div class="gift-carousel-overlay">
-            <span class="swipe-hint" id="swipeHint">&#8592;&ensp;swipe&ensp;&#8594;</span>
+            <span class="swipe-hint" id="swipeHint"></span>
             <div class="gift-carousel-dots" id="giftDots"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5 · ABOUT -->
-    <section id="about">
-      <div class="section-inner section-center">
-        <h2 id="aboutTitle" class="title-nous"></h2>
-        <p id="aboutSub" class="eyebrow-alt"></p>
-        <div class="timeline-wrapper">
-
-          <button id="timelinePrev" class="timeline-arrow">
-            ←
-          </button>
-
-          <div class="love-timeline">
-
-            <div class="timeline-item">
-              <div class="timeline-year">2020</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2020.svg" alt="Placeholder foto 2020 — Prima foto insieme">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2020 — "la nostra canzone"</span>
-                </div>
-                <div class="timeline-caption">
-                  Prima foto insieme
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2021</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2021-1.svg" alt="Placeholder foto 2021 — Weekend in montagna">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2021</span>
-                </div>
-                <div class="timeline-caption">
-                  Weekend in montagna
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2021</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2021-2.svg" alt="Placeholder foto 2021 — Ricordi">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2021</span>
-                </div>
-                <div class="timeline-caption">
-                  Ricordi
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2022</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2022.svg" alt="Placeholder foto 2022 — Viaggio insieme">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2022</span>
-                </div>
-                <div class="timeline-caption">
-                  Viaggio insieme
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2023</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2023.svg" alt="Placeholder foto 2023 — Nuove avventure">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2023</span>
-                </div>
-                <div class="timeline-caption">
-                  Nuove avventure
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2024</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2024.svg" alt="Placeholder foto 2024 — Momenti speciali">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2024</span>
-                </div>
-                <div class="timeline-caption">
-                  Momenti speciali
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2025</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2025.svg" alt="Placeholder foto 2025 — Un passo avanti">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2025</span>
-                </div>
-                <div class="timeline-caption">
-                  Un passo avanti
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2026</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2026.svg" alt="Placeholder foto 2026 — I preparativi">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2026</span>
-                </div>
-                <div class="timeline-caption">
-                  I preparativi
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-year">2027</div>
-              <div class="timeline-photo">
-                <img src="assets/images/placeholder-timeline-2027.svg" alt="Placeholder foto 2027 — Il grande giorno">
-                <div class="timeline-song">
-                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2027</span>
-                </div>
-                <div class="timeline-caption">
-                  Il grande giorno!
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <button id="timelineNext" class="timeline-arrow">
-            →
-          </button>
-
-        </div>
-
-        <p id="aboutText" class="body-lg"></p>
+    <!-- 6 · RSVP -->
+    <section class="waypoint waypoint--gathering" id="way-rsvp">
+      <div class="waypoint-inner center">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <p class="eyebrow" id="rsvpSub"></p>
+        <h2 id="rsvpTitle"></h2>
+        <p class="body-text" id="rsvpBody"></p>
+        <a id="rsvpBtn" class="btn rsvp-btn" href="#" target="_blank" rel="noopener"></a>
       </div>
     </section>
 
-    <!-- 6 · RSVP -->
-    <section id="rsvp">
-      <div class="section-inner section-center">
-        <p id="rsvpEyebrow" class="eyebrow"></p>
-        <h2 id="rsvpTitle"></h2>
-        <p id="rsvpSub" class="body-lg"></p>
-        <a id="rsvpLink" href="#" target="_blank" class="btn"></a>
+    <!-- 7 · QUOTE -->
+    <section class="waypoint waypoint--quote" id="way-quote">
+      <div class="waypoint-inner center">
+        <p class="quote-text" id="quoteText"></p>
       </div>
     </section>
 
   </main>
 
-  <footer>
-    <span class="footer-names">Marta & Emanuele</span>
-    <span class="footer-divider">·</span>
-    <span id="footerDate"></span>
-    <span class="footer-divider">·</span>
-    <span id="footerChurch"></span>
-    <span class="footer-divider">·</span>
-    <span id="footerVenue"></span>
-    <div class="lang">
-      <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
-      <button onclick="setLang('fr')" aria-label="Français">🇫🇷</button>
+  <!-- Floating compass / waypoint button -->
+  <button class="compass-fab" id="compassFab" aria-label="Menu" aria-expanded="false">
+    <span class="fab-star" aria-hidden="true">✦</span>
+  </button>
+
+  <div class="waypoint-menu" id="waypointMenu" hidden>
+    <ul class="waypoint-list">
+      <li><button class="waypoint-link" data-target="way-home" id="navHome"></button></li>
+      <li><button class="waypoint-link" data-target="way-when" id="navWhen"></button></li>
+      <li><button class="waypoint-link" data-target="way-travel" id="navTravel"></button></li>
+      <li><button class="waypoint-link" data-target="way-couple" id="navCouple"></button></li>
+      <li><button class="waypoint-link" data-target="way-gift" id="navGift"></button></li>
+      <li><button class="waypoint-link" data-target="way-rsvp" id="navRsvp"></button></li>
+      <li><button class="waypoint-link" data-target="way-quote" id="navQuote"></button></li>
+    </ul>
+    <div class="lang-switch">
+      <span class="lang-label" id="langLabel"></span>
+      <button class="lang-btn" data-lang="it">ITA</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="en">ENG</button>
     </div>
+  </div>
+
+  <!-- Road progress line + traveler's pin -->
+  <div class="road-progress" aria-hidden="true">
+    <div class="road-line"></div>
+    <div class="road-pin">✦</div>
+  </div>
+
+  <!-- Swipe arrow (appears while swiping) -->
+  <div class="swipe-arrow" id="pageSwipeArrow" aria-hidden="true">›</div>
+
+  <!-- Footer — three central stars -->
+  <footer class="road-footer">
+    <span class="footer-star" aria-hidden="true">✦</span>
+    <span class="footer-star" aria-hidden="true">✦</span>
+    <span class="footer-star" aria-hidden="true">✦</span>
   </footer>
+
+  <!-- Lightbox for polaroids -->
+  <div class="lightbox" id="lightbox" hidden>
+    <img src="" alt="" id="lightboxImg"/>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+  </div>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
