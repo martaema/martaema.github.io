@@ -73,3 +73,44 @@ function renderFooter(t) {
 }
 
 render();
+
+// Touch swipe: detect horizontal swipes on `main` to navigate sections (left = next, right = prev)
+(() => {
+  let touchStartX = 0, touchStartY = 0, touchStartTime = 0, touchMoved = false;
+  const swipeThreshold = 50; // px
+  const swipeMaxTime = 1000; // ms
+
+  mainEl.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+    touchMoved = false;
+  }, {passive: true});
+
+  mainEl.addEventListener('touchmove', (e) => {
+    touchMoved = true;
+  }, {passive: true});
+
+  mainEl.addEventListener('touchend', (e) => {
+    if (!touchMoved) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    // horizontal swipe (more horizontal than vertical, passes threshold, not too slow)
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold && dt < swipeMaxTime) {
+      const currentIndex = sections.findIndex(s => document.getElementById(`nav-${s.id}`).classList.contains('active'));
+      if (dx < 0) {
+        // swipe left -> next section
+        const next = Math.min(sections.length - 1, currentIndex + 1);
+        if (next !== currentIndex) showSection(sections[next].id);
+      } else {
+        // swipe right -> previous section
+        const prev = Math.max(0, currentIndex - 1);
+        if (prev !== currentIndex) showSection(sections[prev].id);
+      }
+    }
+  }, {passive: true});
+})();
