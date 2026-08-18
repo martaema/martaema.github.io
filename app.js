@@ -259,57 +259,16 @@ function getCurrentSectionIndex() {
   return idx >= 0 ? idx : 0;
 }
 
-function shouldSkipPageNav(e) {
-  return e.target.closest ? e.target.closest('.gift-carousel') !== null : false;
-}
+/* ── Swipe arrow — show while scrolling, hide when idle ── */
+let arrowTimer = null;
 
-let touchStartX = 0;
-let touchStartY = 0;
-let touchStartTime = 0;
-let touchMoved = false;
-let touchSkipNav = false;
-const swipeThreshold = 60;
-const swipeMaxTime = 1000;
-
-mainEl.addEventListener('touchstart', (e) => {
-  if (e.touches.length > 1) return;
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-  touchStartTime = Date.now();
-  touchMoved = false;
-  touchSkipNav = shouldSkipPageNav(e);
+mainEl.addEventListener('scroll', () => {
   document.body.classList.add('swiping');
+  clearTimeout(arrowTimer);
+  arrowTimer = setTimeout(() => {
+    document.body.classList.remove('swiping');
+  }, 150);
 }, { passive: true });
-
-mainEl.addEventListener('touchmove', (e) => {
-  if (e.touches.length > 1) return;
-  const dx = e.touches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 10) touchMoved = true;
-}, { passive: true });
-
-mainEl.addEventListener('touchend', (e) => {
-  document.body.classList.remove('swiping');
-  if (touchSkipNav || !touchMoved) return;
-  const touch = e.changedTouches[0];
-  const dx = touch.clientX - touchStartX;
-  const dy = touch.clientY - touchStartY;
-  const dt = Date.now() - touchStartTime;
-
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold && dt < swipeMaxTime) {
-    const current = getCurrentSectionIndex();
-    if (dx < 0) {
-      const next = Math.min(waypoints.length - 1, current + 1);
-      if (next !== current) showWaypoint(waypoints[next].id);
-    } else {
-      const prev = Math.max(0, current - 1);
-      if (prev !== current) showWaypoint(waypoints[prev].id);
-    }
-  }
-}, { passive: true });
-
-mainEl.addEventListener('touchcancel', () => {
-  document.body.classList.remove('swiping');
-});
 
 /* ── Keyboard navigation ────────────────── */
 document.addEventListener('keydown', (e) => {
