@@ -1,116 +1,263 @@
 let lang = 'it';
 
+/* ── Navigation ─────────────────────────── */
 function showSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
+  // reset internal scroll for sections that scroll themselves
   el.scrollTop = 0;
   el.scrollIntoView({ behavior: 'smooth' });
 }
 
-const mainEl = document.querySelector('main');
+const mainEl   = document.querySelector('main');
 const sections = [...document.querySelectorAll('section')];
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      document.querySelectorAll('.nav-link').forEach((a) => {
-        a.classList.toggle('active', a.id === `nav-${id}`);
-      });
-    }
-  });
-}, { root: mainEl, threshold: 0.5 });
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-link').forEach((a) => {
+          a.classList.toggle('active', a.id === `nav-${id}`);
+        });
+      }
+    });
+  },
+  { root: mainEl, threshold: 0.5 }
+);
 
 sections.forEach((s) => observer.observe(s));
 
+/* ── Language ───────────────────────────── */
 function setLang(l) { lang = l; render(); }
 
+/* ── Render ─────────────────────────────── */
 function render() {
   const t = data[lang];
-  document.getElementById('nav-home').innerText = t.nav.home;
-  document.getElementById('nav-rsvp').innerText = t.nav.rsvp;
-  document.getElementById('nav-info').innerText = t.nav.info;
-  document.getElementById('nav-stay').innerText = t.nav.stay;
+
+  // Nav labels
+  document.getElementById('nav-home').innerText  = t.nav.home;
+  document.getElementById('nav-rsvp').innerText  = t.nav.rsvp;
+  document.getElementById('nav-info').innerText  = t.nav.info;
+  document.getElementById('nav-stay').innerText  = t.nav.stay;
   document.getElementById('nav-gifts').innerText = t.nav.gifts;
   document.getElementById('nav-about').innerText = t.nav.about;
 
-  // Put date and place on separate lines if subtitle contains the • separator
-  const subtitleEl = document.getElementById('subtitle');
-  if (t.subtitle && t.subtitle.includes('•')) {
-    const parts = t.subtitle.split('•').map(s => s.trim());
-    subtitleEl.innerHTML = `<span class="subtitle-date">${parts[0]}</span><br><span class="subtitle-place">${parts.slice(1).join(' • ')}</span>`;
-  } else {
-    subtitleEl.innerText = t.subtitle || '';
-  }
+  // Hero
+  document.getElementById('subtitle').innerText = t.subtitle;
 
+  // RSVP
   document.getElementById('rsvpEyebrow').innerText = t.rsvpEyebrow;
-  document.getElementById('rsvpTitle').innerText = t.rsvpTitle;
-  document.getElementById('rsvpSub').innerText = t.rsvpSub;
-  document.getElementById('rsvpLink').innerText = t.rsvpBtn;
-  document.getElementById('rsvpLink').href = data.rsvp;
+  document.getElementById('rsvpTitle').innerText   = t.rsvpTitle;
+  document.getElementById('rsvpSub').innerText     = t.rsvpSub;
+  document.getElementById('rsvpLink').innerText    = t.rsvpBtn;
+  document.getElementById('rsvpLink').href         = t.rsvp;
 
-  document.getElementById('infoTitle').innerText = t.infoTitle;
+  // Info
+  document.getElementById('infoTitle').innerText   = t.infoTitle;
   document.getElementById('churchLabel').innerText = `💒 ${t.churchLabel}`;
-  document.getElementById('churchInfo').innerText = t.churchAddress;
-  document.getElementById('churchTime').innerText = t.churchTime;
-  document.getElementById('churchMap').innerText = t.mapLink || 'Vedi su Maps →';
-  document.getElementById('churchMap').href = data.churchMap;
+  document.getElementById('churchInfo').innerText  = t.churchAddress;
+  document.getElementById('churchTime').innerText  = t.churchTime;
+  document.getElementById('churchMap').innerText   = t.mapLink;
+  document.getElementById('churchMap').href        = data.churchMap;
   const note = document.getElementById('accessNote');
-  note.innerHTML = (t.accessNote || []).map(line => `<span class="access-line">${line}</span>`).join('');
+  note.innerHTML = t.accessNote.map(line => `<span class="access-line">${line}</span>`).join('');
+  document.getElementById('venueLabel').innerText  = `🍷 ${t.venueLabel}`;
+  document.getElementById('venueInfo').innerText   = t.venue;
+  document.getElementById('venueMap').innerText    = t.mapLink;
+  document.getElementById('venueMap').href         = data.venueMap;
 
-  document.getElementById('venueLabel').innerText = `🍷 ${t.venueLabel}`;
-  document.getElementById('venueInfo').innerText = t.venue;
-  document.getElementById('venueMap').innerText = t.mapLink || 'Vedi su Maps →';
-  document.getElementById('venueMap').href = data.venueMap;
+  // Stay
+  document.getElementById('howToGet').innerText    = t.howToGet;
+  document.getElementById('stayTitle').innerText   = t.stayTitle;
+  document.getElementById('trenordLink').innerText = t.trenord;
+  renderTravel(t);
+  renderHotels();
 
+  // Gifts
+  document.getElementById('giftsTitle').innerText = t.giftsTitle;
+  document.getElementById('giftIntro').innerText = t.giftIntro;
+
+  // About
+  document.getElementById('aboutTitle').innerText = t.aboutTitle;
+  document.getElementById('aboutSub').innerText   = t.aboutSub;
+  document.getElementById('aboutText').innerText  = t.about;
+
+  // Footer
   renderFooter(t);
+
+  // Gifts grid re-render (button label is translated)
+  renderGifts();
 }
 
+/* ── Footer ─────────────────────────────── */
 function renderFooter(t) {
-  document.getElementById('footerDate').innerText = data.footerDate;
+  document.getElementById('footerDate').innerText   = data.footerDate;
   document.getElementById('footerChurch').innerText = t.churchAddress;
-  document.getElementById('footerVenue').innerText = t.venue;
+  document.getElementById('footerVenue').innerText  = t.venue;
+}
+
+/* ── HotelCard component ────────────────── */
+function HotelCard(h) {
+  const el = document.createElement('a');
+  el.className = 'hotel-card';
+  el.href = h.website;
+  el.target = '_blank';
+  el.rel = 'noopener';
+  el.innerHTML = `
+    <span class="hotel-card__name">${h.icon} ${h.name}</span>
+    <span class="hotel-card__location">${h.location}</span>
+    <span class="hotel-card__price">da ${h.price} € / notte</span>
+    <span class="hotel-card__links">
+      <span class="hotel-card__link">${lang === 'fr' ? 'Site' : 'Sito'} →</span>
+    </span>
+  `;
+  return el;
+}
+
+function renderHotels() {
+  const c = document.getElementById('hotelGrid');
+  if (!c) return;
+  c.innerHTML = '';
+  data.hotels.forEach((h) => c.appendChild(HotelCard(h)));
+}
+
+/* ── Travel component ───────────────────── */
+function renderTravel(t) {
+  const c = document.getElementById('travelRoutes');
+  c.innerHTML = '';
+  t.routes.forEach((route) => {
+    const block = document.createElement('div');
+    block.className = 'travel-block';
+    block.innerHTML = `<p class="travel-block__from">${route.from}</p>`;
+    route.options.forEach((opt) => {
+      const row = document.createElement('div');
+      row.className = 'travel-row';
+      row.innerHTML = `
+        <span class="travel-row__icon">${opt.icon}</span>
+        <span class="travel-row__desc">${opt.desc}</span>
+        <span class="travel-row__duration">${opt.duration}</span>
+      `;
+      block.appendChild(row);
+    });
+    c.appendChild(block);
+  });
+}
+
+/* ── Gift card component ────────────────── */
+function GiftCard(g) {
+  const el  = document.createElement('div');
+  el.className = 'gift-slide';
+  el.innerHTML = `
+    <div class="gift-slide__card">
+      <span class="gift-card__icon">${g.icon}</span>
+      <span class="gift-card__name">${lang === 'fr' && g.nameFr ? g.nameFr : g.name}</span>
+      ${g.hidePrice ? '' : `<span class="gift-card__price">${g.price} €</span>`}
+    </div>
+    <div class="gift-slide__photo" style="background-image:url('${g.photo}')"></div>
+  `;
+  return el;
+}
+
+/* ── Gifts ──────────────────────────────── */
+function renderGifts() {
+  const c    = document.getElementById('giftList');
+  const dots = document.getElementById('giftDots');
+  c.innerHTML    = '';
+  dots.innerHTML = '';
+
+  data.gifts.forEach((g, i) => {
+    c.appendChild(GiftCard(g));
+
+    const dot = document.createElement('button');
+    dot.className   = 'gift-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.addEventListener('click', () => {
+      c.scrollTo({ left: i * c.offsetWidth, behavior: 'smooth' });
+    });
+    dots.appendChild(dot);
+  });
+
+  const prevBtn = document.getElementById('giftPrev');
+  const nextBtn = document.getElementById('giftNext');
+
+  prevBtn.onclick = () => {
+    const current = Math.round(c.scrollLeft / c.offsetWidth);
+
+    const target =
+      current <= 0
+        ? data.gifts.length - 1
+        : current - 1;
+
+    c.scrollTo({
+      left: target * c.offsetWidth,
+      behavior: 'smooth'
+    });
+  };
+
+  nextBtn.onclick = () => {
+    const current = Math.round(c.scrollLeft / c.offsetWidth);
+
+    const target =
+      current >= data.gifts.length - 1
+        ? 0
+        : current + 1;
+
+    c.scrollTo({
+      left: target * c.offsetWidth,
+      behavior: 'smooth'
+    });
+  };
+
+  // update active dot on scroll + hide swipe hint after first swipe
+  let hinted = false;
+  c.addEventListener('scroll', () => {
+    if (!hinted) {
+      hinted = true;
+      document.getElementById('swipeHint')?.classList.add('hidden');
+    }
+    const idx = Math.round(c.scrollLeft / c.offsetWidth);
+    dots.querySelectorAll('.gift-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === idx)
+    );
+  }, { passive: true });
+
+  const wrap = document.querySelector('.gift-carousel-wrap');
+  c.querySelectorAll('.gift-slide__photo').forEach(photo => {
+    photo.addEventListener('click', () => wrap.classList.toggle('arrows-hidden'));
+  });
 }
 
 render();
 
-// Touch swipe: detect horizontal swipes on `main` to navigate sections (left = next, right = prev)
-(() => {
-  let touchStartX = 0, touchStartY = 0, touchStartTime = 0, touchMoved = false;
-  const swipeThreshold = 50; // px
-  const swipeMaxTime = 1000; // ms
+const timeline = document.querySelector('.love-timeline');
 
-  mainEl.addEventListener('touchstart', (e) => {
-    if (e.touches.length > 1) return;
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchStartTime = Date.now();
-    touchMoved = false;
-  }, {passive: true});
+const prev = document.getElementById('timelinePrev');
+const next = document.getElementById('timelineNext');
 
-  mainEl.addEventListener('touchmove', (e) => {
-    touchMoved = true;
-  }, {passive: true});
+if (timeline && prev && next) {
+  prev.addEventListener('click', () => {
+    timeline.scrollBy({
+      left: -350,
+      behavior: 'smooth'
+    });
+  });
 
-  mainEl.addEventListener('touchend', (e) => {
-    if (!touchMoved) return;
-    const touch = e.changedTouches[0];
-    const dx = touch.clientX - touchStartX;
-    const dy = touch.clientY - touchStartY;
-    const dt = Date.now() - touchStartTime;
+  next.addEventListener('click', () => {
+    const reachedEnd =
+      timeline.scrollLeft + timeline.clientWidth
+      >= timeline.scrollWidth - 20;
 
-    // horizontal swipe (more horizontal than vertical, passes threshold, not too slow)
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold && dt < swipeMaxTime) {
-      const currentIndex = sections.findIndex(s => document.getElementById(`nav-${s.id}`).classList.contains('active'));
-      if (dx < 0) {
-        // swipe left -> next section
-        const next = Math.min(sections.length - 1, currentIndex + 1);
-        if (next !== currentIndex) showSection(sections[next].id);
-      } else {
-        // swipe right -> previous section
-        const prev = Math.max(0, currentIndex - 1);
-        if (prev !== currentIndex) showSection(sections[prev].id);
-      }
+    if (reachedEnd) {
+      timeline.scrollTo({
+        left: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      timeline.scrollBy({
+        left: 350,
+        behavior: 'smooth'
+      });
     }
-  }, {passive: true});
-})();
+  });
+}

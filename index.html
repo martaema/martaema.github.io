@@ -2,36 +2,36 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Marta & Emanuele</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <header>
     <nav class="nav-menu">
-      <a class="nav-link active" onclick="showSection('home')" id="nav-home"></a>
-      <a class="nav-link" onclick="showSection('rsvp')" id="nav-rsvp"></a>
-      <a class="nav-link" onclick="showSection('info')" id="nav-info"></a>
-      <a class="nav-link" onclick="showSection('stay')" id="nav-stay"></a>
-      <a class="nav-link" onclick="showSection('gifts')" id="nav-gifts"></a>
-      <a class="nav-link" onclick="showSection('about')" id="nav-about"></a>
+      <a class="nav-link active" onclick="showSection('home')"  id="nav-home"></a>
+      <a class="nav-link"        onclick="showSection('rsvp')"  id="nav-rsvp"></a>
+      <a class="nav-link"        onclick="showSection('info')"  id="nav-info"></a>
+      <a class="nav-link"        onclick="showSection('stay')"  id="nav-stay"></a>
+      <a class="nav-link"        onclick="showSection('gifts')" id="nav-gifts"></a>
+      <a class="nav-link"        onclick="showSection('about')" id="nav-about"></a>
     </nav>
-    <div class="lang">
-      <button onclick="setLang('fr')" aria-label="French">🇫🇷</button>
-      <button onclick="setLang('it')" aria-label="Italian">🇮🇹</button>
-    </div>
   </header>
 
   <main>
+
+    <!-- 1 · HERO -->
     <section id="home">
       <div class="hero-bg"></div>
       <div class="section-inner section-center">
-        <h1>Marta &amp; Emanuele</h1>
+        <h1>Marta & Emanuele</h1>
         <p id="subtitle" class="subtitle"></p>
       </div>
     </section>
 
+    <!-- 2 · RSVP -->
     <section id="rsvp">
       <div class="section-inner section-center">
         <p id="rsvpEyebrow" class="eyebrow"></p>
@@ -41,6 +41,7 @@
       </div>
     </section>
 
+    <!-- 3 · INFO -->
     <section id="info">
       <div class="section-inner">
         <h2 id="infoTitle"></h2>
@@ -61,19 +62,30 @@
       </div>
     </section>
 
+    <!-- 4 · STAY -->
     <section id="stay">
       <div class="section-inner stay-inner section-center">
         <h2 id="howToGet" class="stay-heading"></h2>
         <div id="travelRoutes" class="travel-routes"></div>
         <a id="trenordLink" class="trenord-link" href="https://www.trenord.it/" target="_blank" rel="noopener"></a>
+
+        <h2 id="stayTitle" class="stay-heading"></h2>
+        <div id="hotelGrid" class="stay-grid"></div>
       </div>
     </section>
 
+    <!-- 5 · GIFTS -->
     <section id="gifts">
       <div class="section-inner">
         <h2 id="giftsTitle"></h2>
         <p id="giftIntro" class="gift-intro"></p>
-        <div class="gift-iban"></div>
+        <div class="gift-iban">
+          <div class="gift-iban-card">
+            <div class="gift-iban-title">Marta & Emanuele</div>
+            <div class="gift-iban-value">IT00 0000 0000 0000 0000 0000 000</div>
+            <div class="gift-iban-bic">BIC : PLACEHOLDERXXX</div>
+          </div>
+        </div>
         <div class="gift-carousel-wrap">
           <button class="carousel-arrow carousel-arrow--prev" id="giftPrev" aria-label="Previous">&#8249;</button>
           <button class="carousel-arrow carousel-arrow--next" id="giftNext" aria-label="Next">&#8250;</button>
@@ -86,16 +98,163 @@
       </div>
     </section>
 
+    <!-- 6 · ABOUT -->
     <section id="about">
       <div class="section-inner section-center">
         <h2 id="aboutTitle" class="title-nous"></h2>
         <p id="aboutSub" class="eyebrow-alt"></p>
+        <div class="timeline-wrapper">
+
+          <button id="timelinePrev" class="timeline-arrow">
+            ←
+          </button>
+
+          <div class="love-timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-year">2020</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2020.svg" alt="Placeholder foto 2020 — Prima foto insieme">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2020 — "la nostra canzone"</span>
+                </div>
+                <div class="timeline-caption">
+                  Prima foto insieme
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2021</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2021-1.svg" alt="Placeholder foto 2021 — Weekend in montagna">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2021</span>
+                </div>
+                <div class="timeline-caption">
+                  Weekend in montagna
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2021</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2021-2.svg" alt="Placeholder foto 2021 — Ricordi">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2021</span>
+                </div>
+                <div class="timeline-caption">
+                  Ricordi
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2022</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2022.svg" alt="Placeholder foto 2022 — Viaggio insieme">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2022</span>
+                </div>
+                <div class="timeline-caption">
+                  Viaggio insieme
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2023</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2023.svg" alt="Placeholder foto 2023 — Nuove avventure">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2023</span>
+                </div>
+                <div class="timeline-caption">
+                  Nuove avventure
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2024.svg" alt="Placeholder foto 2024 — Momenti speciali">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2024</span>
+                </div>
+                <div class="timeline-caption">
+                  Momenti speciali
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2025.svg" alt="Placeholder foto 2025 — Un passo avanti">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2025</span>
+                </div>
+                <div class="timeline-caption">
+                  Un passo avanti
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2026</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2026.svg" alt="Placeholder foto 2026 — I preparativi">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2026</span>
+                </div>
+                <div class="timeline-caption">
+                  I preparativi
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-year">2027</div>
+              <div class="timeline-photo">
+                <img src="assets/images/placeholder-timeline-2027.svg" alt="Placeholder foto 2027 — Il grande giorno">
+                <div class="timeline-song">
+                  <span class="song-placeholder">🎵 Placeholder: Canzone del 2027</span>
+                </div>
+                <div class="timeline-caption">
+                  Il grande giorno!
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button id="timelineNext" class="timeline-arrow">
+            →
+          </button>
+
+        </div>
+
         <p id="aboutText" class="body-lg"></p>
       </div>
     </section>
+
   </main>
 
-  <footer></footer>
+  <footer>
+    <span class="footer-names">Marta & Emanuele</span>
+    <span class="footer-divider">·</span>
+    <span id="footerDate"></span>
+    <span class="footer-divider">·</span>
+    <span id="footerChurch"></span>
+    <span class="footer-divider">·</span>
+    <span id="footerVenue"></span>
+    <div class="lang">
+      <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
+      <button onclick="setLang('fr')" aria-label="Français">🇫🇷</button>
+    </div>
+  </footer>
 
   <script src="data.js"></script>
   <script src="app.js"></script>
