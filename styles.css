@@ -20,6 +20,4 @@ h1{font-size:var(--h1);font-weight:300;letter-spacing:-0.01em;line-height:0.95;c
 .eyebrow{font-size:0.9rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
 .body-lg{font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:300;line-height:1.8;color:var(--ink-lt);max-width:52ch;margin:0 auto}
 .btn{display:inline-block;font-family:var(--font);font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;margin-top:2.5rem}
-footer{position:fixed;bottom:0;left:0;right:0;height:var(--footer-h);padding:0 36px;background:rgba(245,240,232,0.92);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;gap:1rem;z-index:100;border-top:1px solid rgba(139,115,85,0.1)}
-.footer-names{font-weight:600 !important;color:var(--ink) !important}
-@media (max-width:768px){header{padding:0 20px}.section-inner{padding:0 24px}footer{padding:0 16px}}
+@media (max-width:768px){header{padding:0 20px}.section-inner{padding:0 24px}}
