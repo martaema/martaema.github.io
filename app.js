@@ -34,7 +34,14 @@ function render() {
   document.getElementById('nav-gifts').innerText = t.nav.gifts;
   document.getElementById('nav-about').innerText = t.nav.about;
 
-  document.getElementById('subtitle').innerText = t.subtitle;
+  // Put date and place on separate lines if subtitle contains the • separator
+  const subtitleEl = document.getElementById('subtitle');
+  if (t.subtitle && t.subtitle.includes('•')) {
+    const parts = t.subtitle.split('•').map(s => s.trim());
+    subtitleEl.innerHTML = `<span class="subtitle-date">${parts[0]}</span><br><span class="subtitle-place">${parts.slice(1).join(' • ')}</span>`;
+  } else {
+    subtitleEl.innerText = t.subtitle || '';
+  }
 
   document.getElementById('rsvpEyebrow').innerText = t.rsvpEyebrow;
   document.getElementById('rsvpTitle').innerText = t.rsvpTitle;
