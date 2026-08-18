@@ -63,6 +63,7 @@ main#road::-webkit-scrollbar { display: none; }
   width: 100vw;
   flex: 0 0 100vw;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   height: calc(100vh - var(--footer-h) - 1rem);
   overflow-y: auto;
   overflow-x: hidden;
