@@ -82,7 +82,6 @@ function render() {
   document.getElementById('navCouple').innerText = t.nav.couple;
   document.getElementById('navGift').innerText = t.nav.gift;
   document.getElementById('navRsvp').innerText = t.nav.rsvp;
-  document.getElementById('navQuote').innerText = t.nav.quote;
   document.getElementById('langLabel').innerText = t.nav.lang;
 
   // Hero
@@ -142,9 +141,6 @@ function render() {
   document.getElementById('rsvpBody').innerText = t.rsvpBody;
   document.getElementById('rsvpBtn').innerText = t.rsvpBtn;
   document.getElementById('rsvpBtn').href = data.rsvp;
-
-  // Quote
-  document.getElementById('quoteText').innerText = t.quote;
 
   renderHotels();
   renderGifts();

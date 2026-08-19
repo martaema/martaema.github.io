@@ -16,7 +16,6 @@ const data = {
       couple: "Gli sposi",
       gift: "Lista nozze",
       rsvp: "RSVP",
-      quote: "Citazione",
       lang: "Lingua",
     },
 
@@ -68,7 +67,6 @@ const data = {
     rsvpBody: "Facci sapere entro il 3 marzo 2027 se potrai camminare con noi in questo giorno.",
     rsvpBtn: "Conferma la presenza",
 
-    quote: "Not all those who wander are lost",
   },
 
   // ── FRANÇAIS ────────────────────────────
@@ -80,7 +78,6 @@ const data = {
       couple: "Les mariés",
       gift: "Liste de mariage",
       rsvp: "RSVP",
-      quote: "Citation",
       lang: "Langue",
     },
 
@@ -132,7 +129,6 @@ const data = {
     rsvpBody: "Faites-nous savoir avant le 3 mars 2027 si vous pourrez marcher avec nous ce jour-là.",
     rsvpBtn: "Confirmer sa présence",
 
-    quote: "Not all those who wander are lost",
   },
 
   // ── ENGLISH ─────────────────────────────
@@ -144,7 +140,6 @@ const data = {
       couple: "The couple",
       gift: "Gift list",
       rsvp: "RSVP",
-      quote: "Quote",
       lang: "Language",
     },
 
@@ -196,7 +191,6 @@ const data = {
     rsvpBody: "Let us know by March 3, 2027 if you'll walk with us on this day.",
     rsvpBtn: "Confirm attendance",
 
-    quote: "Not all those who wander are lost",
   },
 
   // ── Shared data (not translated) ─────────
