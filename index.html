@@ -15,69 +15,50 @@
     <!-- 1 · HERO -->
     <section class="waypoint waypoint--hero" id="way-home">
       <div class="waypoint-inner center">
-        <div class="compass-stamp compass-stamp--large" aria-hidden="true">
-          <div class="compass-north">N</div>
-          <div class="compass-circle"></div>
-          <div class="compass-spoke"></div>
-        </div>
         <h1>Marta <span class="amp">&</span> Emanuele</h1>
         <p class="hero-date" id="heroDate"></p>
-        <div class="hero-divider" aria-hidden="true"></div>
-        <p class="hero-place" id="heroPlace"></p>
         <p class="hero-swipe-hint" id="heroSwipeHint"></p>
       </div>
     </section>
 
     <!-- 2 · DOVE E QUANDO -->
-    <section class="waypoint" id="way-when">
+    <section class="waypoint" id="way-ceremony">
       <div class="waypoint-inner">
         <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="whenSub"></p>
-        <h2 id="whenTitle"></h2>
+        <p class="eyebrow" id="ceremonyTitle"></p>
         <div class="margin-notes">
-          <article class="margin-note">
-            <h3 id="churchLabel"></h3>
+          <article class="margin-note margin-note--plain">
             <p id="churchName" class="note-name"></p>
             <p class="note-time" id="churchTime"></p>
             <a href="#" id="churchMap" class="map-link" target="_blank" rel="noopener"></a>
           </article>
+        </div>
+        <div class="ceremony-practical">
+          <div class="ceremony-practical__item">
+            <span class="ceremony-practical__icon" role="img" aria-label="Parcheggio">🅿️</span>
+            <ol class="practical-list" id="parkingBody"></ol>
+          </div>
+          <div class="ceremony-practical__item">
+            <span class="ceremony-practical__icon ceremony-practical__icon--metro" role="img" aria-label="Metro">M</span>
+            <ul class="practical-list practical-list--plain" id="transportBody"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · RAGGIUNGERCI -->
+    <section class="waypoint" id="way-reception">
+      <div class="waypoint-inner">
+        <div class="compass-stamp" aria-hidden="true"></div>
+        <p class="eyebrow" id="receptionSub"></p>
+        <h2 id="receptionTitle"></h2>
+        <div class="margin-notes">
           <article class="margin-note">
             <h3 id="venueLabel"></h3>
             <p id="venueName" class="note-name"></p>
             <a href="#" id="venueMap" class="map-link" target="_blank" rel="noopener"></a>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- 3 · RAGGIUNGERCI -->
-    <section class="waypoint" id="way-travel">
-      <div class="waypoint-inner">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="travelSub"></p>
-        <h2 id="travelTitle"></h2>
-
-        <div class="accordion" id="travelAccordion">
-          <details class="accordion-item">
-            <summary id="fromFiumicino"></summary>
-            <div class="accordion-body travel-options">
-              <div class="travel-option"><span class="opt-icon">🚆</span><span id="optTrainDirect"></span><span class="opt-duration" id="duration32"></span></div>
-              <div class="travel-option"><span class="opt-icon">🚌</span><span id="optBusDirect"></span><span class="opt-duration" id="duration50"></span></div>
-            </div>
-          </details>
-          <details class="accordion-item">
-            <summary id="fromMilan"></summary>
-            <div class="accordion-body travel-options">
-              <div class="travel-option"><span class="opt-icon">🚆</span><span id="optTav"></span><span class="opt-duration" id="duration3h"></span></div>
-              <div class="travel-option"><span class="opt-icon">🚘</span><span id="optCar"></span><span class="opt-duration" id="duration6h"></span></div>
-            </div>
-          </details>
-        </div>
-
-        <a id="trenordLink" class="map-link" href="#" target="_blank" rel="noopener"></a>
-
-        <h3 class="hotels-heading" id="hotelsTitle"></h3>
-        <div class="hotel-grid" id="hotelGrid"></div>
       </div>
     </section>
 
@@ -139,6 +120,9 @@
       </div>
     </section>
 
+    <!-- 7 · FINAL PHOTO -->
+    <section class="waypoint waypoint--closing" id="way-closing" aria-label="Foto finale"></section>
+
   </main>
 
   <!-- Floating compass / waypoint button -->
@@ -148,12 +132,10 @@
 
   <div class="waypoint-menu" id="waypointMenu" hidden>
     <ul class="waypoint-list">
-      <li><button class="waypoint-link" data-target="way-home" id="navHome"></button></li>
-      <li><button class="waypoint-link" data-target="way-when" id="navWhen"></button></li>
-      <li><button class="waypoint-link" data-target="way-travel" id="navTravel"></button></li>
+      <li><button class="waypoint-link" data-target="way-ceremony" id="navCeremony"></button></li>
+      <li><button class="waypoint-link" data-target="way-reception" id="navReception"></button></li>
       <li><button class="waypoint-link" data-target="way-couple" id="navCouple"></button></li>
       <li><button class="waypoint-link" data-target="way-gift" id="navGift"></button></li>
-      <li><button class="waypoint-link" data-target="way-rsvp" id="navRsvp"></button></li>
     </ul>
     <div class="lang-switch">
       <span class="lang-label" id="langLabel"></span>

@@ -95,7 +95,19 @@ main#road::-webkit-scrollbar { display: none; }
    HERO
 ───────────────────────────────────────── */
 .waypoint--hero {
+  --hero-content-offset: -10rem;
   align-items: center;
+  background: url("assets/images/05.2026_valdirabbi_MandE-13.jpg") 75% center / cover no-repeat;
+}
+
+.waypoint--hero .waypoint-inner {
+  position: static;
+}
+
+.waypoint--hero h1,
+.waypoint--hero .hero-date {
+  position: relative;
+  top: var(--hero-content-offset);
 }
 
 .waypoint--hero h1 {
@@ -150,6 +162,32 @@ main#road::-webkit-scrollbar { display: none; }
   margin-top: 2.2rem;
   animation: swipe-nudge 1.6s ease-in-out infinite;
   opacity: 0.7;
+}
+
+.waypoint--hero .hero-swipe-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  width: auto;
+  margin-top: 0;
+  text-align: center;
+}
+
+.waypoint--hero h1,
+.waypoint--hero h1 .amp,
+.waypoint--hero .hero-date,
+.waypoint--hero .hero-place,
+.waypoint--hero .hero-swipe-hint {
+  color: #fff;
+}
+
+.waypoint--hero .hero-divider { background: #fff; }
+
+.waypoint--closing {
+  --closing-bg-x: 37%;
+  --closing-bg-y: center;
+  background: url("assets/images/05.2026_valdirabbi_MandE-28.jpg") var(--closing-bg-x) var(--closing-bg-y) / cover no-repeat;
 }
 
 .eyebrow {
@@ -446,6 +484,74 @@ h3 {
 }
 
 .accordion-body { padding: 0 0.2rem 0.8rem; }
+
+.practical-copy {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.margin-note--plain {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.practical-list {
+  padding-left: 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.practical-list li + li { margin-top: 0.4rem; }
+
+.practical-list--plain {
+  padding-left: 0;
+  list-style: none;
+}
+
+.ceremony-practical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+}
+
+.ceremony-practical__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.ceremony-practical__icon {
+  flex: 0 0 1.4rem;
+  margin-top: 0.1rem;
+  font-size: 1.1rem;
+}
+
+.ceremony-practical__icon--metro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background: #c4463b;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.ceremony-practical .practical-list {
+  flex: 1;
+  margin: 0;
+}
 
 .travel-options { display: flex; flex-direction: column; gap: 0.35rem; }
 

@@ -76,48 +76,32 @@ function render() {
   });
 
   // Menu labels
-  document.getElementById('navHome').innerText = t.nav.home;
-  document.getElementById('navWhen').innerText = t.nav.when;
-  document.getElementById('navTravel').innerText = t.nav.travel;
+  document.getElementById('navCeremony').innerText = t.nav.ceremony;
+  document.getElementById('navReception').innerText = t.nav.reception;
   document.getElementById('navCouple').innerText = t.nav.couple;
   document.getElementById('navGift').innerText = t.nav.gift;
-  document.getElementById('navRsvp').innerText = t.nav.rsvp;
   document.getElementById('langLabel').innerText = t.nav.lang;
 
   // Hero
   document.getElementById('heroDate').innerText = t.heroDate;
-  document.getElementById('heroPlace').innerText = t.heroPlace;
   document.getElementById('heroSwipeHint').innerText = t.heroSwipeHint;
 
   // Dove e quando
-  document.getElementById('whenSub').innerText = t.whenSub;
-  document.getElementById('whenTitle').innerText = t.whenTitle;
-  document.getElementById('churchLabel').innerText = t.churchLabel;
+  document.getElementById('ceremonyTitle').innerText = t.ceremonyTitle;
   document.getElementById('churchName').innerText = t.churchName;
   document.getElementById('churchTime').innerText = t.churchTime;
   document.getElementById('churchMap').innerText = t.viewMap;
   document.getElementById('churchMap').href = data.churchMap;
+  renderPracticalList('parkingBody', t.parkingItems);
+  renderPracticalList('transportBody', t.transportItems);
+
+  // Ricevimento
+  document.getElementById('receptionSub').innerText = t.receptionSub;
+  document.getElementById('receptionTitle').innerText = t.receptionTitle;
   document.getElementById('venueLabel').innerText = t.venueLabel;
   document.getElementById('venueName').innerText = t.venueName;
   document.getElementById('venueMap').innerText = t.viewMap;
   document.getElementById('venueMap').href = data.venueMap;
-
-  // Raggiungerci
-  document.getElementById('travelSub').innerText = t.travelSub;
-  document.getElementById('travelTitle').innerText = t.travelTitle;
-  document.getElementById('fromFiumicino').innerText = t.fromFiumicino;
-  document.getElementById('fromMilan').innerText = t.fromMilan;
-  document.getElementById('optTrainDirect').innerText = t.optTrainDirect;
-  document.getElementById('duration32').innerText = t.duration32;
-  document.getElementById('optBusDirect').innerText = t.optBusDirect;
-  document.getElementById('duration50').innerText = t.duration50;
-  document.getElementById('optTav').innerText = t.optTav;
-  document.getElementById('duration3h').innerText = t.duration3h;
-  document.getElementById('optCar').innerText = t.optCar;
-  document.getElementById('duration6h').innerText = t.duration6h;
-  document.getElementById('trenordLink').innerText = t.trenordLink;
-  document.getElementById('trenordLink').href = data.trenord;
-  document.getElementById('hotelsTitle').innerText = t.hotelsTitle;
 
   // Gli sposi
   document.getElementById('coupleSub').innerText = t.coupleSub;
@@ -142,30 +126,16 @@ function render() {
   document.getElementById('rsvpBtn').innerText = t.rsvpBtn;
   document.getElementById('rsvpBtn').href = data.rsvp;
 
-  renderHotels();
   renderGifts();
 }
 
-/* ── Hotels ─────────────────────────────── */
-function HotelCard(h) {
-  const el = document.createElement('div');
-  el.className = 'hotel-card';
-  el.innerHTML = `
-    <span class="hotel-card__name">${h.icon} ${h.name}</span>
-    <span class="hotel-card__location">${h.location}</span>
-    <span class="hotel-card__price">${data[lang].fromPrice.replace('{price}', h.price)}</span>
-    <span class="hotel-card__links">
-      <a href="${h.website}" target="_blank" rel="noopener">${data[lang].siteLink} →</a>
-      <a href="${h.map}" target="_blank" rel="noopener">${data[lang].mapLink} →</a>
-    </span>
-  `;
-  return el;
-}
-
-function renderHotels() {
-  const c = document.getElementById('hotelGrid');
-  c.innerHTML = '';
-  data.hotels.forEach((h) => c.appendChild(HotelCard(h)));
+function renderPracticalList(id, items) {
+  const list = document.getElementById(id);
+  list.replaceChildren(...items.map((item) => {
+    const entry = document.createElement('li');
+    entry.innerText = item;
+    return entry;
+  }));
 }
 
 /* ── Gifts ──────────────────────────────── */
