@@ -149,13 +149,4 @@ const data = {
 
   },
 
-  // ── Shared data (not translated) ─────────
-  gifts: [
-    { name: "Viaggio di nozze in Giappone",  nameFr: "Voyage de noces au Japon",  nameEn: "Honeymoon in Japan",    price: 1200, icon: "✈️", photo: "assets/images/placeholder-gift-honeymoon.svg", hidePrice: true },
-    { name: "Giradischi e vinili — Placeholder", nameFr: "Tourne-disque et vinyles — Placeholder", nameEn: "Turntable and vinyls — Placeholder", price: 300, icon: "🎵", photo: "assets/images/placeholder-gift-vinyl.svg" },
-    { name: "Proiettore — Placeholder",      nameFr: "Projecteur — Placeholder", nameEn: "Projector — Placeholder", price: 600, icon: "🎬", photo: "assets/images/placeholder-gift-projector.svg" },
-    { name: "Macchina da caffè — Placeholder", nameFr: "Machine à café — Placeholder", nameEn: "Coffee machine — Placeholder", price: 200, icon: "☕", photo: "assets/images/placeholder-gift-coffee.svg" },
-    { name: "Set di pentole — Placeholder",  nameFr: "Set de casseroles — Placeholder", nameEn: "Cookware set — Placeholder", price: 250, icon: "🍳", photo: "assets/images/placeholder-gift-cookware.svg" },
-  ],
-
 };

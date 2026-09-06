@@ -908,88 +908,6 @@ h3 {
   text-transform: uppercase;
 }
 
-.gift-carousel-wrap {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-top: 0.4rem;
-}
-
-.gift-carousel {
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  gap: 0;
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-.gift-carousel::-webkit-scrollbar { display: none; }
-
-.gift-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  display: grid;
-  grid-template-rows: auto 240px;
-}
-
-.gift-slide__card {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.8rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.gift-card__icon { font-size: 1.5rem; }
-
-.gift-slide .gift-card__name {
-  font-family: var(--font-serif);
-  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
-  font-weight: 400;
-  color: var(--ink);
-  flex: 1;
-  line-height: 1.2;
-}
-
-.gift-slide .gift-card__price {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--gold);
-  white-space: nowrap;
-}
-
-.gift-slide__photo {
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.gift-carousel-overlay {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  pointer-events: none;
-}
-
-.swipe-hint {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  animation: swipe-nudge 1.6s ease-in-out infinite;
-  transition: opacity 0.4s;
-}
-
-.swipe-hint.hidden { opacity: 0; animation: none; }
-
 @keyframes swipe-nudge {
   0%   { transform: translateX(0); opacity: 0.6; }
   40%  { transform: translateX(8px); opacity: 1; }
@@ -997,47 +915,6 @@ h3 {
   100% { transform: translateX(0); opacity: 0.6; }
 }
 
-.gift-carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  pointer-events: all;
-}
-
-.gift-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(156,122,69,0.25);
-  border: 1px solid var(--gold);
-  transition: background 0.2s, transform 0.2s;
-}
-
-.gift-dot.active {
-  background: var(--gold);
-  transform: scale(1.3);
-}
-
-.carousel-arrow {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255,255,255,0.4);
-  font-size: 26px;
-  color: var(--gold);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.gift-carousel-wrap:hover .carousel-arrow { opacity: 1; }
-
-.carousel-arrow--prev { left: 6px; }
-.carousel-arrow--next { right: 6px; }
 
 /* ─────────────────────────────────────────
    FLOATING COMPASS FAB + MENU
@@ -1269,7 +1146,6 @@ body.swiping .swipe-arrow {
   .polaroid-row { gap: 1rem; }
   .polaroid { width: 155px; }
   .polaroid img { height: 140px; }
-  .gift-slide { grid-template-rows: auto 180px; }
   .compass-fab { right: 12px; bottom: calc(var(--footer-h) + 12px); }
   .waypoint-menu { right: 12px; }
   .road-footer { padding: 0 12px; }

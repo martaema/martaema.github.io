@@ -17,8 +17,7 @@ const giftPlaceholders = [
   'assets/images/placeholder-gift-honeymoon.svg',
   'assets/images/placeholder-gift-vinyl.svg',
   'assets/images/placeholder-gift-projector.svg',
-  'assets/images/placeholder-gift-coffee.svg',
-  'assets/images/placeholder-gift-cookware.svg'
+  'assets/images/placeholder-gift-coffee.svg'
 ];
 
 const mainEl = document.getElementById('road');
@@ -226,23 +225,6 @@ function renderCoupleGallery() {
     figure.append(image);
     return figure;
   }));
-}
-
-function GiftCard(gift) {
-  const el = document.createElement('div');
-  el.className = 'gift-slide';
-  const name = lang === 'fr' ? (g.nameFr || g.name)
-    : lang === 'en' ? (g.nameEn || g.name)
-    : g.name;
-  el.innerHTML = `
-    <div class="gift-slide__card">
-      <span class="gift-card__icon">${g.icon}</span>
-      <span class="gift-card__name">${name}</span>
-      ${g.hidePrice ? '' : `<span class="gift-card__price">${g.price} €</span>`}
-    </div>
-    <div class="gift-slide__photo" style="background-image:url('${g.photo}')"></div>
-  `;
-  return el;
 }
 
 function GiftGridCard(gift) {
