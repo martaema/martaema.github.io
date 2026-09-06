@@ -347,6 +347,7 @@ h3 {
 
 /* Content pages share the hero's typographic anchor. */
 .waypoint:not(.waypoint--hero):not(.waypoint--closing) {
+  --page-title-top: calc(50vh - 10rem);
   align-items: flex-start;
   color: #000;
   padding-top: 0;
@@ -354,12 +355,12 @@ h3 {
 
 .waypoint:not(.waypoint--hero):not(.waypoint--closing) .waypoint-inner {
   /* The content begins below a title that is anchored at the hero height. */
-  padding-top: calc(50vh - 5rem);
+  padding-top: calc(var(--page-title-top) + var(--h1) + 2rem);
 }
 
 .page-title {
   position: absolute;
-  top: calc(50vh - 10rem);
+  top: var(--page-title-top);
   right: 0;
   left: 0;
   color: var(--gold);
@@ -395,6 +396,11 @@ h3 {
   margin-right: auto;
   margin-left: auto;
   text-align: center;
+}
+
+@media (min-width: 700px) {
+  #way-rsvp .waypoint-inner { max-width: 1000px; }
+  #way-rsvp .page-title { white-space: nowrap; }
 }
 
 .couple-gallery,
