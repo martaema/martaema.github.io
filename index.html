@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f1ea"/>
   <title>Marta & Emanuele · 03.04.2027</title>
   <link rel="stylesheet" href="styles.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -24,8 +24,7 @@
     <!-- 2 · DOVE E QUANDO -->
     <section class="waypoint" id="way-ceremony">
       <div class="waypoint-inner">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="ceremonyTitle"></p>
+        <h2 class="page-title" id="ceremonyTitle"></h2>
         <div class="margin-notes">
           <article class="margin-note margin-note--plain">
             <p id="churchName" class="note-name"></p>
@@ -35,7 +34,6 @@
         </div>
         <div class="ceremony-practical">
           <div class="ceremony-practical__item">
-            <span class="ceremony-practical__icon" role="img" aria-label="Parcheggio">🅿️</span>
             <ol class="practical-list" id="parkingBody"></ol>
           </div>
           <div class="ceremony-practical__item">
@@ -49,12 +47,9 @@
     <!-- 3 · RAGGIUNGERCI -->
     <section class="waypoint" id="way-reception">
       <div class="waypoint-inner">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="receptionSub"></p>
-        <h2 id="receptionTitle"></h2>
+        <h2 class="page-title" id="receptionTitle"></h2>
         <div class="margin-notes">
           <article class="margin-note">
-            <h3 id="venueLabel"></h3>
             <p id="venueName" class="note-name"></p>
             <a href="#" id="venueMap" class="map-link" target="_blank" rel="noopener"></a>
           </article>
@@ -65,28 +60,16 @@
     <!-- 4 · GLI SPOSI -->
     <section class="waypoint" id="way-couple">
       <div class="waypoint-inner">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="coupleSub"></p>
-        <h2 id="coupleTitle"></h2>
+        <h2 class="page-title" id="coupleTitle"></h2>
         <p class="body-text" id="coupleBody"></p>
-        <div class="polaroid-row">
-          <figure class="polaroid polaroid--tilt-l">
-            <img src="assets/images/placeholder-photo-meet.svg" alt="" id="couplePhoto1Alt" loading="lazy"/>
-            <figcaption class="polaroid-caption" id="couplePhoto1Caption"></figcaption>
-          </figure>
-          <figure class="polaroid polaroid--tilt-r">
-            <img src="assets/images/placeholder-photo-proposal.svg" alt="" id="couplePhoto2Alt" loading="lazy"/>
-            <figcaption class="polaroid-caption" id="couplePhoto2Caption"></figcaption>
-          </figure>
-        </div>
+        <div class="couple-gallery" id="coupleGallery" aria-label="Galleria fotografica degli sposi"></div>
       </div>
     </section>
 
     <!-- 5 · LISTA NOZZE -->
     <section class="waypoint" id="way-gift">
       <div class="waypoint-inner">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <h2 id="giftTitle"></h2>
+        <h2 class="page-title" id="giftTitle"></h2>
         <p class="body-text" id="giftIntro"></p>
 
         <div class="gift-iban">
@@ -97,26 +80,16 @@
           </div>
         </div>
 
-        <div class="gift-carousel-wrap">
-          <button class="carousel-arrow carousel-arrow--prev" id="giftPrev" aria-label="Previous">&#8249;</button>
-          <button class="carousel-arrow carousel-arrow--next" id="giftNext" aria-label="Next">&#8250;</button>
-          <div id="giftList" class="gift-carousel"></div>
-          <div class="gift-carousel-overlay">
-            <span class="swipe-hint" id="swipeHint"></span>
-            <div class="gift-carousel-dots" id="giftDots"></div>
-          </div>
-        </div>
+        <div id="giftList" class="gift-grid"></div>
       </div>
     </section>
 
     <!-- 6 · RSVP -->
     <section class="waypoint waypoint--gathering" id="way-rsvp">
       <div class="waypoint-inner center">
-        <div class="compass-stamp" aria-hidden="true"></div>
-        <p class="eyebrow" id="rsvpSub"></p>
-        <h2 id="rsvpTitle"></h2>
+        <h2 class="page-title" id="rsvpTitle"></h2>
         <p class="body-text" id="rsvpBody"></p>
-        <a id="rsvpBtn" class="btn rsvp-btn" href="#" target="_blank" rel="noopener"></a>
+        <button id="rsvpBtn" class="btn rsvp-btn" type="button"></button>
       </div>
     </section>
 
@@ -132,10 +105,12 @@
 
   <div class="waypoint-menu" id="waypointMenu" hidden>
     <ul class="waypoint-list">
+      <li><button class="waypoint-link" data-target="way-home" id="navHome"></button></li>
       <li><button class="waypoint-link" data-target="way-ceremony" id="navCeremony"></button></li>
       <li><button class="waypoint-link" data-target="way-reception" id="navReception"></button></li>
       <li><button class="waypoint-link" data-target="way-couple" id="navCouple"></button></li>
       <li><button class="waypoint-link" data-target="way-gift" id="navGift"></button></li>
+      <li><button class="waypoint-link" data-target="way-rsvp" id="navRsvp"></button></li>
     </ul>
     <div class="lang-switch">
       <span class="lang-label" id="langLabel"></span>
@@ -166,6 +141,62 @@
     <img src="" alt="" id="lightboxImg"/>
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
   </div>
+
+  <dialog class="contribution-dialog" id="contributionDialog" aria-labelledby="contributionDialogTitle">
+    <form id="contributionForm" class="contribution-form">
+      <button class="dialog-close" type="button" id="contributionClose" aria-label="Chiudi">×</button>
+      <p class="eyebrow">Lista nozze</p>
+      <h2 id="contributionDialogTitle">Contribuisci</h2>
+      <p class="contribution-item" id="contributionItemName"></p>
+      <input type="hidden" id="contributionGiftId" name="giftId" />
+      <label>Il tuo nome<input id="contributionName" name="name" required autocomplete="name" maxlength="80" /></label>
+      <label>Importo (€)<input id="contributionAmount" name="amount" type="number" min="1" step="0.01" required inputmode="decimal" /></label>
+      <label>Un messaggio per gli sposi<textarea id="contributionMessage" name="message" maxlength="500" rows="4"></textarea></label>
+      <button class="btn contribution-submit" type="submit">Invia il contributo</button>
+      <p class="contribution-status" id="contributionStatus" role="status"></p>
+    </form>
+  </dialog>
+
+  <dialog class="contribution-dialog rsvp-dialog" id="rsvpDialog" aria-labelledby="rsvpDialogTitle">
+    <form id="rsvpForm" class="contribution-form rsvp-form">
+      <button class="dialog-close" type="button" id="rsvpClose" aria-label="Chiudi">×</button>
+      <p class="eyebrow">RSVP</p>
+      <h2 id="rsvpDialogTitle">Sarai dei nostri?</h2>
+      <label>Nome e cognome<input name="fullName" required autocomplete="name" maxlength="100" /></label>
+      <fieldset>
+        <legend>Sarai presente?</legend>
+        <label><input type="radio" name="attendance" value="Sì" required /> Sì</label>
+        <label><input type="radio" name="attendance" value="No" /> No</label>
+      </fieldset>
+      <label>Quanti bambini saranno con te?<input name="children" type="number" min="0" step="1" value="0" inputmode="numeric" /></label>
+      <label>Da dove arrivi?
+        <select name="origin" id="rsvpOrigin" required>
+          <option value="" selected disabled>Scegli un’opzione</option>
+          <option>Roma</option><option>Milano</option><option>Parigi</option><option>Altro</option>
+        </select>
+      </label>
+      <div id="rsvpTransportGroup" hidden>
+        <label>Come arrivi?
+          <select name="transport" id="rsvpTransport">
+            <option value="" selected>Scegli un’opzione</option>
+            <option>Macchina</option><option>Treno</option><option>Aereo</option>
+          </select>
+        </label>
+      </div>
+      <div id="rsvpTransferGroup" hidden>
+        <fieldset>
+          <legend>Stiamo considerando l’ipotesi di noleggiare un autobus per lo spostamento dalla cerimonia alla festa. Saresti interessato o stavi già considerando di noleggiare una macchina?</legend>
+          <label><input type="radio" name="transfer" value="Bus" /> Bus</label>
+          <label><input type="radio" name="transfer" value="Noleggiare una macchina" /> Noleggiare una macchina</label>
+        </fieldset>
+      </div>
+      <label>Allergie o intolleranze<textarea name="allergies" rows="3" maxlength="500"></textarea></label>
+      <label>Una canzone per ballare<textarea name="song" rows="2" maxlength="200"></textarea></label>
+      <label>Un messaggio per gli sposi<textarea name="message" rows="4" maxlength="500"></textarea></label>
+      <button class="btn contribution-submit" type="submit">Invia la risposta</button>
+      <p class="contribution-status" id="rsvpStatus" role="status"></p>
+    </form>
+  </dialog>
 
   <script src="data.js"></script>
   <script src="app.js"></script>

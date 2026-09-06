@@ -5,6 +5,8 @@ const data = {
 
   churchMap: "https://maps.google.com/maps/search/?api=1&query=Basilica+di+Santa+Maria+in+Domnica+alla+Navicella+Roma",
   venueMap:  "https://maps.app.goo.gl/9WjNGVW2Fb3BCNNE6",
+  // Incolla qui l'URL del Web App di Google Apps Script una volta pubblicato.
+  giftContributionsEndpoint: "https://script.google.com/macros/s/AKfycbzim5BZ6aC2iGrQ31FZIalYR_nOuHcPghKsMgwA3dTFnmoogiqE3vIBKf1F-YmCGSpURQ/exec",
 
   // ── ITALIANO (default) ──────────────────
   it: {
