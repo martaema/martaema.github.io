@@ -95,7 +95,7 @@ main#road::-webkit-scrollbar { display: none; }
    HERO
 ───────────────────────────────────────── */
 .waypoint--hero {
-  --hero-content-offset: -10rem;
+  --hero-content-offset: -12rem;
   align-items: center;
   background: url("assets/images/05.2026_valdirabbi_MandE-13.jpg") 75% center / cover no-repeat;
 }
@@ -348,7 +348,7 @@ h3 {
 /* Content pages share the hero's typographic anchor. */
 .waypoint:not(.waypoint--hero):not(.waypoint--closing) {
   --page-vertical-lift: 6rem;
-  --page-title-top: calc(50vh - 10rem - var(--page-vertical-lift));
+  --page-title-top: calc(50vh - 12rem - var(--page-vertical-lift));
   align-items: flex-start;
   color: #000;
   padding-top: 0;
