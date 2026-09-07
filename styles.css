@@ -347,7 +347,8 @@ h3 {
 
 /* Content pages share the hero's typographic anchor. */
 .waypoint:not(.waypoint--hero):not(.waypoint--closing) {
-  --page-title-top: calc(50vh - 10rem);
+  --page-vertical-lift: 6rem;
+  --page-title-top: calc(50vh - 10rem - var(--page-vertical-lift));
   align-items: flex-start;
   color: #000;
   padding-top: 0;
@@ -617,7 +618,9 @@ h3 {
 .margin-notes {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  text-align: center;
 }
 
 .margin-note {
@@ -637,8 +640,8 @@ h3 {
 }
 
 .note-time {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 400;
   color: var(--ink-lt);
   margin-top: 0.15rem;
