@@ -45,7 +45,7 @@ const data = {
     couplePhoto2Caption: "il sì è stato detto",
 
     giftTitle: "Lista nozze",
-    giftIntro: "Se desiderate aiutarci a iniziare questo nuovo capitolo, potete regalarci uno degli oggetti qui sotto oppure contribuire al nostro viaggio di nozze in Giappone ❤️",
+    giftIntro: "Qui puoi aiutarci a costruire la nostra famiglia.<br>Scegli il regalo a cui desideri contribuire, clicca su “Contribuisci” e indica il tuo nome e l’importo. Effettua poi separatamente il bonifico utilizzando l’IBAN riportato qui sotto.<br>Se preferisci contribuire al nostro viaggio di nozze in Oriente, puoi effettuare un bonifico indicando “Viaggio” nella causale.",
     swipeHint: "‹ swipe ›",
 
     rsvpSub: "RSVP",
@@ -92,7 +92,7 @@ const data = {
     couplePhoto2Caption: "le oui a été dit",
 
     giftTitle: "Liste de mariage",
-    giftIntro: "Si vous souhaitez nous aider à commencer ce nouveau chapitre, vous pouvez nous offrir l'un des objets ci-dessous ou contribuer à notre voyage de noces au Japon ❤️",
+    giftIntro: "Ici, vous pouvez nous aider à construire notre foyer.<br>Choisissez le cadeau auquel vous souhaitez contribuer, cliquez sur « Contribuer », puis indiquez votre nom et le montant. Effectuez ensuite le virement séparément en utilisant l’IBAN indiqué ci-dessous.<br>Si vous préférez contribuer à notre voyage de noces en Orient, vous pouvez effectuer un virement en indiquant « Voyage » comme motif.",
     swipeHint: "‹ swipe ›",
 
     rsvpSub: "RSVP",
@@ -139,7 +139,7 @@ const data = {
     couplePhoto2Caption: "the yes was said",
 
     giftTitle: "Gift list",
-    giftIntro: "If you'd like to help us start this new chapter, you can gift us one of the items below or contribute to our honeymoon in Japan ❤️",
+    giftIntro: "Here you can help us build our home together.<br>Choose the gift you would like to contribute to, click “Contribute,” and enter your name and the amount. Then make a separate bank transfer using the IBAN below.<br>If you would rather contribute to our honeymoon in the Far East, you can make a bank transfer with “Honeymoon” as the reference.",
     swipeHint: "‹ swipe ›",
 
     rsvpSub: "RSVP",

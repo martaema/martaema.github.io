@@ -123,18 +123,20 @@ function render() {
 
   // Gli sposi
   document.getElementById('coupleTitle').innerText = t.coupleTitle;
-  document.getElementById('coupleBody').innerText = lang === 'it' ? 'placeholder frase' : t.coupleBody;
+  const coupleBody = lang === 'it' ? '' : t.coupleBody;
+  document.getElementById('coupleBody').innerText = coupleBody;
+  document.getElementById('coupleBody').hidden = !coupleBody;
   renderCoupleGallery();
 
   // Lista nozze
   document.getElementById('giftTitle').innerText = t.giftTitle;
-  document.getElementById('giftIntro').innerHTML = lang === 'it'
-    ? 'Qui puoi aiutarci a costruire la nostra famiglia.<br>Seleziona l’oggetto che vuoi regalarci o a cui vuoi contribuire, inserisci l’ammontare ed effettua un bonifico.<br>Per contribuire al nostro viaggio di nozze in Oriente, invia semplicemente un bonifico con causale “viaggio”.'
-    : t.giftIntro;
+  document.getElementById('giftIntro').innerHTML = t.giftIntro;
 
   // RSVP
   document.getElementById('rsvpTitle').innerText = t.rsvpTitle;
-  document.getElementById('rsvpBody').innerText = lang === 'it' ? 'placeholder frase' : t.rsvpBody;
+  const rsvpBody = lang === 'it' ? '' : t.rsvpBody;
+  document.getElementById('rsvpBody').innerText = rsvpBody;
+  document.getElementById('rsvpBody').hidden = !rsvpBody;
   document.getElementById('rsvpBtn').innerText = t.rsvpBtn;
 
   renderGifts();
@@ -171,6 +173,8 @@ const couplePhotos = [
 const contributionDialog = document.getElementById('contributionDialog');
 const contributionForm = document.getElementById('contributionForm');
 const contributionStatus = document.getElementById('contributionStatus');
+const giftDetailDialog = document.getElementById('giftDetailDialog');
+const giftDetailContent = document.getElementById('giftDetailContent');
 const localContributionKey = 'martaemanuele-gift-contributions';
 let contributionTotals = JSON.parse(localStorage.getItem(localContributionKey) || '{}');
 
@@ -233,6 +237,9 @@ function GiftGridCard(gift) {
   const total = Math.min(Number(contributionTotals[gift.id]) || 0, gift.price);
   const el = document.createElement('article');
   el.className = 'gift-card';
+  el.tabIndex = 0;
+  el.setAttribute('role', 'button');
+  el.setAttribute('aria-label', `Apri i dettagli di ${giftName(gift)}`);
   el.innerHTML = `
     <div class="gift-card__photo" style="background-image:url('${giftPhoto(gift)}')"></div>
     <h3 class="gift-card__name">${giftName(gift)}</h3>
@@ -240,7 +247,17 @@ function GiftGridCard(gift) {
     <progress class="gift-card__progress" value="${total}" max="${gift.price}"></progress>
     <p class="gift-card__progress-label">${money(total)} di ${money(gift.price)}</p>
     <button class="btn" type="button">Contribuisci</button>`;
-  el.querySelector('button').addEventListener('click', () => openContributionDialog(gift));
+  el.addEventListener('click', () => openGiftDetailDialog(gift));
+  el.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openGiftDetailDialog(gift);
+    }
+  });
+  el.querySelector('button').addEventListener('click', (event) => {
+    event.stopPropagation();
+    openContributionDialog(gift);
+  });
   return el;
 }
 
@@ -256,6 +273,25 @@ function openContributionDialog(gift) {
   document.getElementById('contributionItemName').textContent = giftName(gift);
   contributionDialog.showModal();
   document.getElementById('contributionName').focus();
+}
+
+function openGiftDetailDialog(gift) {
+  const total = Math.min(Number(contributionTotals[gift.id]) || 0, gift.price);
+  giftDetailContent.innerHTML = `
+    <button class="dialog-close" type="button" aria-label="Chiudi">×</button>
+    <div class="gift-detail__photo" style="background-image:url('${giftPhoto(gift)}')"></div>
+    <p class="eyebrow">Lista nozze</p>
+    <h2 id="giftDetailTitle">${giftName(gift)}</h2>
+    <p class="gift-detail__price">Costo totale: ${money(gift.price)}</p>
+    <progress class="gift-card__progress" value="${total}" max="${gift.price}"></progress>
+    <p class="gift-card__progress-label">${money(total)} di ${money(gift.price)}</p>
+    <button class="btn contribution-submit" type="button">Contribuisci</button>`;
+  giftDetailContent.querySelector('.dialog-close').addEventListener('click', () => giftDetailDialog.close());
+  giftDetailContent.querySelector('.contribution-submit').addEventListener('click', () => {
+    giftDetailDialog.close();
+    openContributionDialog(gift);
+  });
+  giftDetailDialog.showModal();
 }
 
 document.getElementById('contributionClose').addEventListener('click', () => contributionDialog.close());

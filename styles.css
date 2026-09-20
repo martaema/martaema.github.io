@@ -396,6 +396,7 @@ h3 {
 #way-gift .body-text {
   margin-right: auto;
   margin-left: auto;
+  max-width: 62ch;
   text-align: center;
 }
 
@@ -407,7 +408,7 @@ h3 {
 .couple-gallery,
 .gift-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   padding-bottom: 2rem;
 }
@@ -437,6 +438,16 @@ h3 {
   border: 1px solid var(--line);
   padding: clamp(0.35rem, 1.2vw, 0.75rem);
   box-shadow: 0 3px 12px rgba(43, 43, 43, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gift-card:hover,
+.gift-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(43, 43, 43, 0.16);
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 
 .gift-card__photo {
@@ -534,6 +545,28 @@ h3 {
   font: inherit;
   font-weight: 400;
 }
+
+.contribution-bank-details {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border-left: 3px solid var(--gold);
+  background: var(--soft);
+  color: #000;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.contribution-bank-details p { margin: 0; }
+.contribution-bank-details p + p { margin-top: 0.7rem; }
+.contribution-bank-details span { font-family: 'Courier New', monospace; font-size: 0.88rem; }
+
+.gift-detail-dialog { width: min(92vw, 680px); }
+.gift-detail__photo {
+  aspect-ratio: 16 / 9;
+  margin: -0.4rem -0.4rem 1.5rem;
+  background: var(--soft) center / cover no-repeat;
+}
+.gift-detail__price { margin: 0.5rem 0; color: #000; font-size: 1.05rem; }
 
 .contribution-submit { color: #000; margin-top: 1.3rem; width: 100%; }
 .contribution-submit:hover { background: #000; color: var(--cream); }
@@ -871,7 +904,7 @@ h3 {
 /* ─────────────────────────────────────────
    GIFTS — carousel
 ───────────────────────────────────────── */
-#way-gift .waypoint-inner { max-width: 640px; }
+#way-gift .waypoint-inner { max-width: 920px; }
 
 .gift-iban {
   display: flex;

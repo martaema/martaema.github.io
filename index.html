@@ -74,9 +74,9 @@
 
         <div class="gift-iban">
           <div class="gift-iban-card">
-            <div class="gift-iban-title">Marta & Emanuele</div>
-            <div class="gift-iban-value">IT00 0000 0000 0000 0000 0000 000</div>
-            <div class="gift-iban-bic">BIC : PLACEHOLDERXXX</div>
+            <div class="gift-iban-title">Marta Bevilacqua & Emanuele Albertinale</div>
+            <div class="gift-iban-value">FR76 2823 3000 0192 9472 4055 302</div>
+            <div class="gift-iban-bic">BIC : REVOFRP2</div>
           </div>
         </div>
 
@@ -151,10 +151,18 @@ o
       <input type="hidden" id="contributionGiftId" name="giftId" />
       <label>Il tuo nome<input id="contributionName" name="name" required autocomplete="name" maxlength="80" /></label>
       <label>Importo (€)<input id="contributionAmount" name="amount" type="number" min="1" step="0.01" required inputmode="decimal" /></label>
+      <div class="contribution-bank-details">
+        <p>Per finalizzare il regalo effettua un bonifico dell’ammontare scelto al seguente IBAN:</p>
+        <p><strong>Marta Bevilacqua &amp; Emanuele Albertinale</strong><br><span>FR76 2823 3000 0192 9472 4055 302</span></p>
+      </div>
       <label>Un messaggio per gli sposi<textarea id="contributionMessage" name="message" maxlength="500" rows="4"></textarea></label>
       <button class="btn contribution-submit" type="submit">Invia il contributo</button>
       <p class="contribution-status" id="contributionStatus" role="status"></p>
     </form>
+  </dialog>
+
+  <dialog class="contribution-dialog gift-detail-dialog" id="giftDetailDialog" aria-labelledby="giftDetailTitle">
+    <div class="contribution-form" id="giftDetailContent"></div>
   </dialog>
 
   <dialog class="contribution-dialog rsvp-dialog" id="rsvpDialog" aria-labelledby="rsvpDialogTitle">
