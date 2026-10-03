@@ -1175,11 +1175,36 @@ body.swiping .swipe-arrow {
 .lightbox[hidden] { display: none; }
 
 .lightbox img {
-  max-width: 90vw;
+  max-width: calc(100vw - 128px);
   max-height: 80vh;
   object-fit: contain;
   border: 10px solid var(--paper);
   border-radius: 4px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  height: 56px;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.lightbox-prev { left: 22px; }
+.lightbox-next { right: 22px; }
+.lightbox-nav[hidden] { display: none; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
 }
 
 .lightbox-close {
@@ -1196,6 +1221,12 @@ body.swiping .swipe-arrow {
   line-height: 1;
 }
 
+.lightbox-nav:focus-visible,
+.lightbox-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 @media (max-width: 480px) {
   .waypoint-inner { padding: 0 20px; }
   .polaroid-row { gap: 1rem; }
@@ -1204,6 +1235,11 @@ body.swiping .swipe-arrow {
   .compass-fab { right: 12px; bottom: calc(var(--footer-h) + 12px); }
   .waypoint-menu { right: 12px; }
   .road-footer { padding: 0 12px; }
+  .lightbox { padding: 16px 52px; }
+  .lightbox img { max-width: calc(100vw - 104px); }
+  .lightbox-nav { width: 40px; height: 48px; font-size: 2.5rem; }
+  .lightbox-prev { left: 6px; }
+  .lightbox-next { right: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

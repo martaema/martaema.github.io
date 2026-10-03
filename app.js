@@ -154,8 +154,8 @@ function renderPracticalList(id, items) {
 /* ── Gifts ──────────────────────────────── */
 /* Gallery and gift contributions */
 const couplePhotos = [
-  'IMG_0120.HEIC', 'IMG_8247.HEIC', 'IMG_8250.HEIC', 'IMG_3489.HEIC',
-  'IMG_9216.HEIC', '1b562035-3de0-4c6e-bb71-f24d5936bb8b.jpg', 'IMG_9710.HEIC', 'IMG_9728.HEIC',
+  'IMG_0120.HEIC', 'IMG_8247.HEIC', 'IMG_3489.HEIC', 'IMG_9216.HEIC',
+  '1b562035-3de0-4c6e-bb71-f24d5936bb8b.jpg', 'IMG_8250.HEIC', 'IMG_9710.HEIC', 'IMG_9728.HEIC',
   'da8da0d3-123b-4589-9e40-671d754ba7a3.JPG', '403F5ED9-FFEB-4479-9BAA-B8D7D287DC60.JPG', 'IMG_9597.jpg',
   '2CEFFE42-17F7-46D4-9392-C41DE7020E2C.JPG', '1934c684-54c8-4b56-9e34-5c80c9de740c.jpg', '5f68d3f4-7aaa-4304-9263-a5957579dcf9.JPG',
   'e9eb1e1e-ff96-4abc-a23e-1dc9f1534d68.jpg', 'IMG_8034.HEIC', 'WhatsApp Image 2026-10-03 at 17.09.17.jpeg', '28cac987-4653-4349-8488-0eff29ea32ab.jpg',
@@ -409,21 +409,86 @@ rsvpForm.addEventListener('submit', async (event) => {
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+const lightboxCounter = document.getElementById('lightboxCounter');
+let lightboxPhotoIndex = -1;
+let lightboxSwipeStartX = null;
+
+function showLightboxPhoto(index) {
+  lightboxPhotoIndex = (index + couplePhotos.length) % couplePhotos.length;
+  const photoNumber = lightboxPhotoIndex + 1;
+  lightboxImg.src = `assets/foto_sposi/${couplePhotos[lightboxPhotoIndex]}`;
+  lightboxImg.alt = `Marta e Emanuele, foto ${photoNumber}`;
+  lightboxCounter.textContent = `${photoNumber} di ${couplePhotos.length}`;
+  lightboxCounter.hidden = couplePhotos.length < 2;
+  lightboxPrev.hidden = couplePhotos.length < 2;
+  lightboxNext.hidden = couplePhotos.length < 2;
+}
+
+function closeLightbox() {
+  lightbox.hidden = true;
+  lightboxPhotoIndex = -1;
+}
 
 document.addEventListener('click', (event) => {
   const img = event.target.closest('.couple-gallery__item img, .polaroid img');
   if (!img) return;
-  lightboxImg.src = img.src;
-  lightboxImg.alt = img.alt || '';
+  const galleryImages = [...document.querySelectorAll('.couple-gallery__item img')];
+  const galleryIndex = galleryImages.indexOf(img);
+  if (galleryIndex >= 0) {
+    showLightboxPhoto(galleryIndex);
+  } else {
+    lightboxPhotoIndex = -1;
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || '';
+    lightboxCounter.hidden = true;
+    lightboxPrev.hidden = true;
+    lightboxNext.hidden = true;
+  }
   lightbox.hidden = false;
+  lightboxClose.focus();
 });
 
-document.getElementById('lightboxClose').addEventListener('click', () => {
-  lightbox.hidden = true;
-});
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightboxPrev.addEventListener('click', () => showLightboxPhoto(lightboxPhotoIndex - 1));
+lightboxNext.addEventListener('click', () => showLightboxPhoto(lightboxPhotoIndex + 1));
 
 lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) lightbox.hidden = true;
+  if (e.target === lightbox) closeLightbox();
+});
+
+lightbox.addEventListener('pointerdown', (event) => {
+  if (lightboxPhotoIndex < 0 || event.target.closest('button')) return;
+  lightboxSwipeStartX = event.clientX;
+});
+
+lightbox.addEventListener('pointerup', (event) => {
+  if (lightboxSwipeStartX == null) return;
+  const distance = event.clientX - lightboxSwipeStartX;
+  lightboxSwipeStartX = null;
+  if (Math.abs(distance) < 40) return;
+  showLightboxPhoto(lightboxPhotoIndex + (distance < 0 ? 1 : -1));
+});
+
+document.addEventListener('keydown', (event) => {
+  if (lightbox.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeLightbox();
+    return;
+  }
+  if (lightboxPhotoIndex < 0) return;
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault();
+    showLightboxPhoto(lightboxPhotoIndex - 1);
+  }
+  if (event.key === 'ArrowRight') {
+    event.preventDefault();
+    showLightboxPhoto(lightboxPhotoIndex + 1);
+  }
 });
 
 /* ── Horizontal swipe page navigation ───── */
@@ -446,6 +511,7 @@ mainEl.addEventListener('scroll', () => {
 
 /* ── Keyboard navigation ────────────────── */
 document.addEventListener('keydown', (e) => {
+  if (e.defaultPrevented) return;
   if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
   const current = getCurrentSectionIndex();
   const target = e.key === 'ArrowRight'
