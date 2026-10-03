@@ -154,9 +154,9 @@ function renderPracticalList(id, items) {
 /* ── Gifts ──────────────────────────────── */
 /* Gallery and gift contributions */
 const couplePhotos = [
-  'IMG_0120.HEIC', 'IMG_8034.HEIC', 'IMG_8247.HEIC', 'IMG_8250.HEIC',
-  'IMG_3489.HEIC', 'IMG_9216.HEIC', '1b562035-3de0-4c6e-bb71-f24d5936bb8b.jpg', 'IMG_9710.HEIC', 'IMG_9728.HEIC',
-  'e9eb1e1e-ff96-4abc-a23e-1dc9f1534d68.jpg', 'WhatsApp Image 2026-10-03 at 17.09.17.jpeg', '28cac987-4653-4349-8488-0eff29ea32ab.jpg',
+  'IMG_0120.HEIC', 'IMG_8247.HEIC', 'IMG_8250.HEIC', 'IMG_3489.HEIC',
+  'IMG_9216.HEIC', '1b562035-3de0-4c6e-bb71-f24d5936bb8b.jpg', 'IMG_9710.HEIC', 'IMG_9728.HEIC',
+  'e9eb1e1e-ff96-4abc-a23e-1dc9f1534d68.jpg', 'IMG_8034.HEIC', 'WhatsApp Image 2026-10-03 at 17.09.17.jpeg', '28cac987-4653-4349-8488-0eff29ea32ab.jpg',
   'def91121-15f3-4c37-9efc-8861c69693cf.jpg', 'cb567018-6dd1-4330-b35f-76bbac568b30.jpg',
   'c75dede6-7bab-46ac-870b-f59a5039bda5.jpg', 'c0004890-33ef-4baa-a200-3b09a9779f49.jpg',
   'ba2bc65e-9783-47a9-b91a-97542604c81f.jpg', 'b841bb43-c7ea-4a46-bd21-5d5facedd13b.jpg',
