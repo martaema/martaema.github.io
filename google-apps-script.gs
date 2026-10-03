@@ -8,6 +8,7 @@
 const SHEET_NAME = 'Contributi';
 const GIFTS_SHEET_NAME = 'Regali';
 const RSVP_SHEET_NAME = 'RSVP';
+const NOTIFICATION_RECIPIENTS = ['marta.emanuele.27@gmail.com'];
 const GIFT_HEADERS = ['ID', 'Titolo IT', 'Titolo FR', 'Titolo EN', 'Prezzo', 'Foto'];
 const DEFAULT_GIFTS = [
   ['regalo-1', 'Viaggio di nozze in Oriente', 'Voyage de noces en Orient', 'Honeymoon in the Far East', 3500, ''],
@@ -20,6 +21,20 @@ const DEFAULT_GIFTS = [
 function safeText_(value) {
   const text = value == null ? '' : String(value);
   return /^[\s]*[=+\-@]/.test(text) ? `'${text}` : text;
+}
+
+function notificationValue_(value) {
+  return value == null || value === '' ? '—' : String(value);
+}
+
+function sendNotification_(subject, lines) {
+  if (!NOTIFICATION_RECIPIENTS.length) return;
+  MailApp.sendEmail({
+    to: NOTIFICATION_RECIPIENTS.join(','),
+    subject,
+    body: lines.join('\n'),
+    name: 'Marta & Emanuele — sito nozze',
+  });
 }
 
 function getContributionsSheet_() {
@@ -96,6 +111,19 @@ function doPost(event) {
       safeText_(payload.origin), safeText_(payload.transport), safeText_(payload.transfer),
       safeText_(payload.allergies), safeText_(payload.song), safeText_(payload.message)
     ]);
+    sendNotification_('Nuova risposta RSVP', [
+      'È stata inviata una nuova risposta RSVP.',
+      '',
+      `Nome: ${notificationValue_(payload.fullName)}`,
+      `Presenza: ${notificationValue_(payload.attendance)}`,
+      `Bambini: ${Number(payload.children) || 0}`,
+      `Provenienza: ${notificationValue_(payload.origin)}`,
+      `Trasporto: ${notificationValue_(payload.transport)}`,
+      `Spostamento: ${notificationValue_(payload.transfer)}`,
+      `Allergie o intolleranze: ${notificationValue_(payload.allergies)}`,
+      `Canzone: ${notificationValue_(payload.song)}`,
+      `Messaggio: ${notificationValue_(payload.message)}`,
+    ]);
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -104,6 +132,17 @@ function doPost(event) {
   sheet.appendRow([
     new Date(), safeText_(payload.giftId), safeText_(payload.name),
     Number(payload.amount) || 0, safeText_(payload.message)
+  ]);
+  const gift = getGifts_().find((item) => item.id === String(payload.giftId));
+  sendNotification_('Nuovo contributo alla lista nozze', [
+    'È stato registrato un nuovo contributo sul sito.',
+    '',
+    `Regalo: ${notificationValue_(gift ? gift.name : payload.giftId)}`,
+    `Nome: ${notificationValue_(payload.name)}`,
+    `Importo indicato: € ${Number(payload.amount) || 0}`,
+    `Messaggio: ${notificationValue_(payload.message)}`,
+    '',
+    'Nota: verifica separatamente l’effettivo arrivo del bonifico.',
   ]);
   return ContentService
     .createTextOutput(JSON.stringify({ ok: true }))
