@@ -177,6 +177,7 @@ const giftDetailDialog = document.getElementById('giftDetailDialog');
 const giftDetailContent = document.getElementById('giftDetailContent');
 const localContributionKey = 'martaemanuele-gift-contributions';
 let contributionTotals = JSON.parse(localStorage.getItem(localContributionKey) || '{}');
+let giftsAreLoading = Boolean(data.giftContributionsEndpoint);
 
 async function loadContributionTotals() {
   if (!data.giftContributionsEndpoint) return;
@@ -199,6 +200,9 @@ async function loadContributionTotals() {
     renderGifts();
   } catch {
     // The local display remains usable if the spreadsheet is temporarily unavailable.
+  } finally {
+    giftsAreLoading = false;
+    renderGifts();
   }
 }
 
@@ -262,7 +266,16 @@ function GiftGridCard(gift) {
 }
 
 function renderGifts() {
-  document.getElementById('giftList').replaceChildren(...data.gifts.map(GiftGridCard));
+  const list = document.getElementById('giftList');
+  list.classList.toggle('gift-grid--loading', giftsAreLoading);
+  if (giftsAreLoading) {
+    const loading = document.createElement('p');
+    loading.className = 'gift-list-loading';
+    loading.textContent = 'Caricamento lista nozze…';
+    list.replaceChildren(loading);
+    return;
+  }
+  list.replaceChildren(...data.gifts.map(GiftGridCard));
 }
 
 /* ── Polaroid lightbox ──────────────────── */

@@ -413,6 +413,19 @@ h3 {
   padding-bottom: 2rem;
 }
 
+.gift-grid--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.gift-list-loading {
+  margin: 0;
+  color: var(--gold);
+  font-style: italic;
+}
+
 .couple-gallery__item {
   aspect-ratio: 1;
   overflow: hidden;
