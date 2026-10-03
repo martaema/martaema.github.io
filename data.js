@@ -45,7 +45,7 @@ const data = {
     couplePhoto2Caption: "il sì è stato detto",
 
     giftTitle: "Lista nozze",
-    giftIntro: "Se vorrai aiutarci a costruire la nostra famiglia e hai piacere di scegliere il regalo che ci sarà utile, potrai contribuire cliccando su “Contribuisci”, indicando il tuo nome e l’importo desiderato.<br>Effettua poi il bonifico separatamente, utilizzando l’IBAN riportato qui sotto.<br>Se preferisci contribuire al nostro viaggio di nozze in Oriente, indica “Viaggio” nella causale del bonifico.",
+    giftIntro: "Se vorrai aiutarci a costruire la nostra famiglia e hai piacere di scegliere il regalo che ci sarà utile, puoi cliccare su “Contribuisci”, indicando il tuo nome e l’importo desiderato.<br>Effettua poi il bonifico separatamente, utilizzando l’IBAN riportato qui sotto.<br>Se preferisci contribuire al nostro viaggio di nozze in Oriente, indica “Viaggio” nella causale del bonifico.",
     swipeHint: "‹ swipe ›",
 
     rsvpSub: "RSVP",
