@@ -460,18 +460,23 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 
-lightbox.addEventListener('pointerdown', (event) => {
+lightbox.addEventListener('touchstart', (event) => {
   if (lightboxPhotoIndex < 0 || event.target.closest('button')) return;
-  lightboxSwipeStartX = event.clientX;
-});
+  lightboxSwipeStartX = event.touches[0]?.clientX ?? null;
+}, { passive: true });
 
-lightbox.addEventListener('pointerup', (event) => {
+lightbox.addEventListener('touchend', (event) => {
   if (lightboxSwipeStartX == null) return;
-  const distance = event.clientX - lightboxSwipeStartX;
+  const endX = event.changedTouches[0]?.clientX;
+  const distance = endX == null ? 0 : endX - lightboxSwipeStartX;
   lightboxSwipeStartX = null;
   if (Math.abs(distance) < 40) return;
   showLightboxPhoto(lightboxPhotoIndex + (distance < 0 ? 1 : -1));
-});
+}, { passive: true });
+
+lightbox.addEventListener('touchcancel', () => {
+  lightboxSwipeStartX = null;
+}, { passive: true });
 
 document.addEventListener('keydown', (event) => {
   if (lightbox.hidden) return;
